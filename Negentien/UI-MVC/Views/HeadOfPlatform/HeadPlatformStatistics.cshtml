@@ -1,0 +1,65 @@
+﻿@model NT.BL.Domain.Util.HeadPlatformNumbers
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/headPlatformStatistics.entry.js" defer></script>
+    <link rel="stylesheet" href="~/dist/headPlatformStatistics.css">
+
+}
+
+<div class="statistics-background justify-content-center mt-4 p-5 rounded-5">
+    <h2 class="statistics-font-title">Platform Dashboard</h2>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="card border-0 col-3 mx-2 shadow-sm">
+                <div class="card-body border-white  ">
+                    <h5 class="statistics-font-rest">Total Sub-Platforms</h5>
+                    <p class="statistics-font-rest number-looks">@Model.AmountOfSharingPlatforms</p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm  col-3 mx-2">
+                <div class="card-body border-white">
+                    <h5 class="statistics-font-rest">Total Projects</h5>
+                    <p class=" number-looks ">@Model.AmountOfProjects</p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm  col-3 mx-2">
+                <div class="card-body border-white">
+                    <h5 class="statistics-font-rest">Avg Flows Per Project</h5>
+                    <p class=" number-looks ">@Model.AvgAmountOfFlowsPerProject.ToString("#.##")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-center">
+        <div class="card m-2 shadow-sm">
+            <div class="card-body border-white my-2">
+                <h5 class="statistics-font-rest mb-2">Total vs Active Projects per Sub-platform</h5>
+                <div class="col-10 mt-3">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+      <div class="row justify-content-center">
+            <div class="card m-2 shadow-sm">
+                <div class="card-body border-white my-2">
+                    <h5 class="statistics-font-rest mb-2">Average Amount of Flows Per Project Per SharingPlatform</h5>
+                    <div class="col-10 mt-3">
+                        <canvas id="avg-flow"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>

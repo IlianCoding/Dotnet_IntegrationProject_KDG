@@ -1,0 +1,279 @@
+﻿@using Humanizer.Localisation
+@using NT.BL.Domain.flowpck
+@using NT.BL.Domain.questionpck.QuestionDomPck
+@using NT.BL.Domain.sessionpck
+@using NT.UI.MVC.Resources
+@using Resources = NT.UI.MVC.Resources.Resources
+@model NT.BL.Domain.flowpck.Flow
+
+@{
+    ViewBag.Title = "FlowDetail";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/detailFlow.entry.js" defer></script>
+    <script src="~/dist/updateFlow.entry.js" defer></script>
+}
+
+<div id="alert-delete">
+
+</div>
+
+<div id="flow-page">
+    <a class="btn btn-outline-primary btn-return col-sm-2" asp-controller="Project" asp-action="ProjectDetail" asp-route-id="@ViewBag.Project.Id">@Resources.terug_project</a>
+    <h1 id="HeaderFlowName">@Model.FlowName</h1>
+    <input id="projectStatusFlowDetail" value="@(ViewBag.Project.IsActive ? "true" : "false")" type="hidden">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-detail-tab" data-bs-toggle="pill" data-bs-target="#pills-detail" type="button" role="tab" aria-controls="pills-detail" aria-selected="true">@Resources.details</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-steps-tab" data-bs-toggle="pill" data-bs-target="#pills-steps" type="button" role="tab" aria-controls="pills-steps" aria-selected="false">@Resources.steps</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-costeps-tab" data-bs-toggle="pill" data-bs-target="#pills-costeps" type="button" role="tab" aria-controls="pills-costeps" aria-selected="false">@Resources.conditionele_steps</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-notes-tab" data-bs-toggle="pill" data-bs-target="#pills-notes" type="button" role="tab" aria-controls="pills-notes" aria-selected="false">@Resources.notes</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-detail" role="tabpanel" aria-labelledby="pills-detail-tab" tabindex="0">
+            <div id="noteWarning" class="alert alert-warning border border-warning">
+                @Resources.flow_cannot_open
+            </div>
+            <div id="noteWarningStartNote" class="alert alert-warning border border-warning">
+                @Resources.flow_closed
+            </div>
+
+
+            <div id="editDiv">
+<div class="mb-3 row align-items-center">
+    <label class="col-sm-2 form-label fw-bold" for="flowName">@Resources.flow_name</label>
+    <div class="col-sm-10 d-flex align-items-end">
+        <div class="flex-grow-1 me-3">
+            <span class="required-label">@Resources.required</span>
+            <input class="form-control" asp-for="FlowName" id="flowName">
+            <input value="@Model.FlowName" id="defaultFlowNameInput" type="hidden">
+            <span class="text-danger" id="flowNameSpan"></span>
+        </div>
+        <button class="btn btn-danger align-self-end" id="delete-flow">@Resources.delete_flow</button>
+    </div>
+</div>
+
+
+
+                <div class="mb-3 row">
+                    <label class="col-sm-2 form-label fw-bold" asp-for="State">@Resources.state</label>
+                    <input value="@Model.State" id="defaultFlowStatusInput" type="hidden">
+                    <div class="col-sm-10">
+                        <div class="mb-3 col">
+                            <div class="form-check form-check-inline">
+                                <input name="status" id="radioOpenStatus" class="form-check-input" type="radio" value="true">
+                                <label for="radioOpenStatus" class="form-check-label">@Resources.active</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input name="status" id="radioCloseStatus" class="form-check-input" type="radio" value="false">
+                                <label for="radioCloseStatus" class="form-check-label">@Resources.inactive</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mb-3 row">
+                    <label class="col-sm-2 form-label fw-bold" asp-for="IsLinear">@Resources.flow</label>
+                    <input value="@(Model.IsLinear ? "true" : "false")" id="defaultFlowIsLinearInput" type="hidden">
+                    <div class="col-sm-10">
+                        <div class="mb-3 col">
+                            <div class="form-check form-check-inline">
+                                <input name="isLinear" id="radioTrueLineair" class="form-check-input" type="radio" value="true">
+                                <label for="radioTrueLineair" class="form-check-label">@Resources.linear</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input name="isLinear" id="radioFalseLineair" class="form-check-input" type="radio" value="false">
+                                <label for="radioFalseLineair" class="form-check-label">@Resources.circular</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" id="updateFlow" class="btn btn-primary btn-outline-primary">@Resources.confirm_changes</button>
+            </div>
+            <div id="detailDiv">
+                <div class="row mb-3">
+                    <span class="col-sm-2 form-label fw-bold">Flow name</span>
+                    <span class="col-sm-10" id="flowNameDetailSpan">@Model.FlowName</span>
+                </div>
+                <div class="row mb-3">
+                    <span class="col-sm-2 form-label fw-bold">@Resources.state</span>
+                    <span class="col-sm-10" id="flowStatusDetailSpan">@Model.State</span>
+                </div>
+                <div class="row mb-3">
+                    <span class="col-sm-2 form-label fw-bold">@Resources.flow</span>
+                    <span class="col-sm-10" id="flowLinairStatusDetailSpan">@(Model.IsLinear ? "Linear" : "Circular")</span>
+                </div>
+                <button class="btn btn-primary " id="editFlowButton">@Resources.edit</button>
+                
+                @if (Model.FirstStep != null)
+                {
+                    <a class="btn btn-primary" asp-action="FirstStep" asp-controller="Step" asp-route-flowId="@Model.Id">@Resources.test_flow</a>
+                }
+                
+                @if (@ViewBag.Project.IsActive)
+                {
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        @Resources.change_state
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-steps" role="tabpanel" aria-labelledby="pills-steps-tab" tabindex="0">
+
+            <table class="table table-striped">
+                <h4>@Resources.normal_steps</h4>
+                <thead>
+                <tr>
+                    <th>@Resources.name</th>
+                    <th>@Resources.theme</th>
+                    <th>@Resources.state</th>
+                    <th>@Resources.content_type</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (Step step in Model.Steps)
+                {
+                    @if (step.IsConditioneel == false)
+                    {
+                        <tr id="stepRow_@(step.Id)">
+                            <!--<td>@step.Name</td>-->
+                            <td><a asp-controller=Step asp-action="StepDetail" asp-route-stepId="@step.Id">@step.Name</a></td>
+                            <td>@step.Theme.ThemeName</td>
+                            <td id="stepState_@(step.Id)">@step.StepState</td>
+                            @if (step.Content is Question question)
+                            {
+                                <td>@question.QuestionType</td>
+                            }
+                            else
+                            {
+                                <td>@Resources.info</td>
+                            }
+                            <td>
+                                <button id="removeStep_@(step.Id)" class="btn btn-primary" type="button">@Resources.delete_step</button>
+                            </td>
+                            <td>
+                                @if (step.StepState == State.Open)
+                                {
+                                    <button id="deactivateStep_@(step.Id)" class="btn btn-primary" type="button">@Resources.deactivate_step</button>
+                                }
+                                else
+                                {
+                                    <button id="activateStep_@(step.Id)" class="btn btn-primary" type="button">@Resources.activate_step</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+            <br/>
+            <a asp-controller="Step" asp-action="AddStep" asp-route-flowId="@Model.Id" class="btn btn-primary">@Resources.add_step</a>
+
+        </div>
+        <div class="tab-pane fade" id="pills-costeps" role="tabpanel" aria-labelledby="pills-costeps-tab" tabindex="0">
+
+            <table class="table table-striped">
+                <h4>@Resources.conditionele_steps</h4>
+                <thead>
+                <tr>
+                    <th>@Resources.name</th>
+                    <th>@Resources.theme</th>
+                    <th>@Resources.state</th>
+                    <th>@Resources.content_type</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (Step step in Model.Steps)
+                {
+                    @if (step.IsConditioneel)
+                    {
+                        <tr id="stepRow_@(step.Id)">
+                            <td><a asp-controller=Step asp-action="StepDetail" asp-route-stepId="@step.Id">@step.Name</a></td>
+                            <td>@step.Theme.ThemeName</td>
+                            <td id="stepState_@(step.Id)">@step.StepState</td>
+                            @if (step.Content is Question question)
+                            {
+                                <td>@question.QuestionType</td>
+                            }
+                            else
+                            {
+                                <td>@Resources.info</td>
+                            }
+                            <td>
+                                <button id="removeStep_@(step.Id)" class="btn btn-primary" type="button">@Resources.delete_step</button>
+                            </td>
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+
+            <br/>
+            <a asp-controller="Step" asp-action="AddConditionalStep" asp-route-flowId="@Model.Id" class="btn btn-primary">@Resources.add_step</a>
+        </div>
+        <div class="tab-pane fade" id="pills-notes" role="tabpanel" aria-labelledby="pills-notes-tab" tabindex="0">
+            <table class="table table-striped">
+                <h4>@Resources.notes</h4>
+                <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>@Resources.title</th>
+                    <th>@Resources.created_by</th>
+                    <th>@Resources.detail</th>
+                </tr>
+                </thead>
+                <tbody>
+                @{
+                    int teller = 1;
+                }
+                @foreach (Note note in @ViewBag.Notes)
+                {
+                    <tr>
+                        <td>@teller</td>
+                        <td>@note.NoteTitle</td>
+                        <td>@note.CreatedAttendantName</td>
+                        <td>
+                            <a asp-controller="Note" asp-action="NoteDetail" asp-route-noteId="@note.Id">@Resources.details</a>
+                        </td>
+                    </tr>
+                    teller++;
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@Resources.modal_title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="modalFlowDetail" class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resources.close</button>
+                <button id="changeFlowStatus" type="button" class="btn btn-primary" data-bs-dismiss="modal">@Resources.confirm_changes</button>
+            </div>
+        </div>
+    </div>
+</div>

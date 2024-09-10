@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using NT.UI.MVC.Resources
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Scripts
+{
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@Resources.home_page</title>
+</head>
+<style>
+    .full-height {
+        height: 70vh;
+    }
+    .center-top {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+    }
+    .center-top h1, .center-top p {
+        width: 100%;
+    }
+</style>
+<body id="bodyHome" >
+<section class="slide_section position-relative full-height">
+    <div class="container center-top">
+        <div class="col-md-9 col-lg-8">
+            <div class="detail-box">
+                <h1>
+                    @Resources.your_voice_matters
+                </h1>
+                <br/>
+                <br/>
+                <p>
+                    @Resources.unlock_insights
+                </p>
+                <br/>
+                <br/>
+                <a class="btn btn-primary" asp-controller="WebPlatform" asp-action="ThemeOverview" asp-route-projectId="1">Look at the current projects!</a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

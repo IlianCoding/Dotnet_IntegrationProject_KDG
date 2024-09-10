@@ -1,0 +1,22 @@
+﻿
+.attendant-flow-detail-dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.attendant-flow-detail-dropdown-item {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: normal;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  margin: 5px 0;
+}
+
+.attendant-flow-detail-dropdown-item:hover,
+.attendant-flow-detail-dropdown-item:focus,
+.attendant-flow-detail-dropdown-item:active {
+  color: inherit;
+}

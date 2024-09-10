@@ -1,0 +1,617 @@
+﻿<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="your_voice_matters" xml:space="preserve">
+        <value>Uw stem telt</value>
+    </data>
+    <data name="flows" xml:space="preserve">
+        <value>Flows </value>
+    </data>
+    <data name="home_page" xml:space="preserve">
+        <value>Hoofdpagina</value>
+    </data>
+    <data name="start_survey" xml:space="preserve">
+        <value>Start Enquête!</value>
+    </data>
+    <data name="state" xml:space="preserve">
+        <value>Status</value>
+    </data>
+    <data name="flow" xml:space="preserve">
+        <value>Flow  </value>
+    </data>
+    <data name="total_running" xml:space="preserve">
+        <value>Totaal lopend</value>
+    </data>
+    <data name="make_conditional_point" xml:space="preserve">
+        <value>Maak een conditioneel punt</value>
+    </data>
+    <data name="title" xml:space="preserve">
+        <value> Titel</value>
+    </data>
+    <data name="what_answeroption_cp" xml:space="preserve">
+        <value>Welke antwoordoptie wil u dit conditioneel punt op plaatsen</value>
+    </data>
+    <data name="what_step" xml:space="preserve">
+        <value>Welke stap gaat het naartoe:</value>
+    </data>
+    <data name="lets_go" xml:space="preserve">
+        <value>Ga ervoor</value>
+    </data>
+    <data name="something_went_wrong" xml:space="preserve">
+        <value>Er ging iets mis :/</value>
+    </data>
+    <data name="fill_in_contact" xml:space="preserve">
+        <value>Vul je contactgegevens in</value>
+    </data>
+    <data name="last_name" xml:space="preserve">
+        <value>Achternaam</value>
+    </data>
+    <data name="email_adress" xml:space="preserve">
+        <value>E-mail </value>
+    </data>
+    <data name="first_name" xml:space="preserve">
+        <value>Voornaam</value>
+    </data>
+    <data name="phone_number" xml:space="preserve">
+        <value>Telefoonnummer: +32</value>
+    </data>
+    <data name="further_info" xml:space="preserve">
+        <value>Wilt u verdere informatie ontvangen?</value>
+    </data>
+    <data name="submit_personal" xml:space="preserve">
+        <value>Persoonlijke gegevens invoeren</value>
+    </data>
+    <data name="name" xml:space="preserve">
+        <value>Naam</value>
+    </data>
+    <data name="flow_enable" xml:space="preserve">
+        <value>Flow ingeschakeld</value>
+    </data>
+    <data name="lineair_flow" xml:space="preserve">
+        <value>Lineaire flow  </value>
+    </data>
+    <data name="create_flow" xml:space="preserve">
+        <value>Creëer een flow</value>
+    </data>
+    <data name="flow_details" xml:space="preserve">
+        <value>Flow details  </value>
+    </data>
+    <data name="mode" xml:space="preserve">
+        <value>Modus</value>
+    </data>
+    <data name="kiosk_mode" xml:space="preserve">
+        <value>Kiosk modus</value>
+    </data>
+    <data name="normal_mode" xml:space="preserve">
+        <value>AI modus</value>
+    </data>
+    <data name="run" xml:space="preserve">
+        <value>Laat lopen</value>
+    </data>
+    <data name="start_time" xml:space="preserve">
+        <value>Starttijd</value>
+    </data>
+    <data name="detail" xml:space="preserve">
+        <value>Detail  </value>
+    </data>
+    <data name="running" xml:space="preserve">
+        <value>Lopende</value>
+    </data>
+    <data name="pauzed" xml:space="preserve">
+        <value>Gepauzeerd</value>
+    </data>
+    <data name="close" xml:space="preserve">
+        <value>Afsluiten</value>
+    </data>
+    <data name="show_hide_table" xml:space="preserve">
+        <value>Toon/Verberg tabel</value>
+    </data>
+    <data name="details" xml:space="preserve">
+        <value>Details  </value>
+    </data>
+    <data name="conditionele_steps" xml:space="preserve">
+        <value>Conditionele stappen</value>
+    </data>
+    <data name="steps" xml:space="preserve">
+        <value>Stappen</value>
+    </data>
+    <data name="required" xml:space="preserve">
+        <value>* Verplicht </value>
+    </data>
+    <data name="flow_type" xml:space="preserve">
+        <value>Flow type  </value>
+    </data>
+    <data name="project_name" xml:space="preserve">
+        <value>Project naam</value>
+    </data>
+    <data name="inactive" xml:space="preserve">
+        <value>Inactief</value>
+    </data>
+    <data name="pauze" xml:space="preserve">
+        <value>Pauzeren</value>
+    </data>
+    <data name="active" xml:space="preserve">
+        <value>Actief</value>
+    </data>
+    <data name="circular" xml:space="preserve">
+        <value>Circulair </value>
+    </data>
+    <data name="linear" xml:space="preserve">
+        <value>Lineaire</value>
+    </data>
+    <data name="confirm_changes" xml:space="preserve">
+        <value>Bevestig</value>
+    </data>
+    <data name="change_state" xml:space="preserve">
+        <value>Verander status</value>
+    </data>
+    <data name="edit" xml:space="preserve">
+        <value>Bewerk</value>
+    </data>
+    <data name="content_type" xml:space="preserve">
+        <value>Inhoud type</value>
+    </data>
+    <data name="delete_flow" xml:space="preserve">
+        <value>Verwijder flow</value>
+    </data>
+    <data name="theme" xml:space="preserve">
+        <value>Thema</value>
+    </data>
+    <data name="normal_steps" xml:space="preserve">
+        <value>Normale steps</value>
+    </data>
+    <data name="add_conditional" xml:space="preserve">
+        <value>Voeg conditioneel punt toe</value>
+    </data>
+    <data name="info" xml:space="preserve">
+        <value>Informatie</value>
+    </data>
+    <data name="delete_step" xml:space="preserve">
+        <value>Verwijder stap</value>
+    </data>
+    <data name="activate_step" xml:space="preserve">
+        <value>Activeer stap</value>
+    </data>
+    <data name="deactivate_step" xml:space="preserve">
+        <value>Deactiveer stap</value>
+    </data>
+    <data name="add_step" xml:space="preserve">
+        <value>Voeg een nieuwe stap toe</value>
+    </data>
+    <data name="add" xml:space="preserve">
+        <value>Voeg toe</value>
+    </data>
+    <data name="adding_platform" xml:space="preserve">
+        <value>Een nieuw platform toevoegen</value>
+    </data>
+    <data name="organization_name" xml:space="preserve">
+        <value>Organisatie naam</value>
+    </data>
+    <data name="birthday" xml:space="preserve">
+        <value>Verjaardag</value>
+    </data>
+    <data name="owned_projects" xml:space="preserve">
+        <value>Projecten in bezit </value>
+    </data>
+    <data name="add_platform" xml:space="preserve">
+        <value>Voeg een nieuw platform toe</value>
+    </data>
+    <data name="creation_date" xml:space="preserve">
+        <value>Creatie datum</value>
+    </data>
+    <data name="maintainer" xml:space="preserve">
+        <value>Begeleider</value>
+    </data>
+    <data name="number_project" xml:space="preserve">
+        <value>Aantal toegewezen projecten</value>
+    </data>
+    <data name="unlock_insights" xml:space="preserve">
+        <value>Ontsluit inzichten, stimuleer groei! Duik vandaag nog in onze enquête-app en laat je stem horen. 🚀 #SurveySucces</value>
+    </data>
+    <data name="submit" xml:space="preserve">
+        <value>Dien in</value>
+    </data>
+    <data name="add_organisation_member" xml:space="preserve">
+        <value>Een nieuw organisatielid toevoegen</value>
+    </data>
+    <data name="submit_organisation" xml:space="preserve">
+        <value>Dien organisatie details in</value>
+    </data>
+    <data name="enter_credentials" xml:space="preserve">
+        <value>Referenties invoeren</value>
+    </data>
+    <data name="add_attendant" xml:space="preserve">
+        <value>Een nieuwe begeleider toevoegen</value>
+    </data>
+    <data name="submit_attendant" xml:space="preserve">
+        <value>Dien begeleider details in</value>
+    </data>
+    <data name="assign_project" xml:space="preserve">
+        <value>Wijs een project toe</value>
+    </data>
+    <data name="all_employees" xml:space="preserve">
+        <value>Alle medewerkers</value>
+    </data>
+    <data name="attendant_details" xml:space="preserve">
+        <value>Begeleider details</value>
+    </data>
+    <data name="reassign" xml:space="preserve">
+        <value>Hertoewijzen</value>
+    </data>
+    <data name="assigned_project" xml:space="preserve">
+        <value>Toegewezen project</value>
+    </data>
+    <data name="all_projects" xml:space="preserve">
+        <value>Alle projecten</value>
+    </data>
+    <data name="add_project" xml:space="preserve">
+        <value>Voeg een nieuw project toe</value>
+    </data>
+    <data name="add_organisation" xml:space="preserve">
+        <value>Een nieuwe organisatie toevoegen</value>
+    </data>
+    <data name="head_theme_description" xml:space="preserve">
+        <value>Hoofdthema beschrijving</value>
+    </data>
+    <data name="head_theme_name" xml:space="preserve">
+        <value>Hoofdthema naam</value>
+    </data>
+    <data name="project_info" xml:space="preserve">
+        <value>Project informatie</value>
+    </data>
+    <data name="add_subtheme" xml:space="preserve">
+        <value>Voeg subthema toe</value>
+    </data>
+    <data name="delete_subtheme" xml:space="preserve">
+        <value>Verwijder subthema</value>
+    </data>
+    <data name="subthemes" xml:space="preserve">
+        <value>Subthemas</value>
+    </data>
+    <data name="update_subtheme" xml:space="preserve">
+        <value>Update subthema</value>
+    </data>
+    <data name="no_info_available" xml:space="preserve">
+        <value>Geen informatie beschikbaar</value>
+    </data>
+    <data name="head_theme" xml:space="preserve">
+        <value>Hoofdthema</value>
+    </data>
+    <data name="update_head_theme" xml:space="preserve">
+        <value>Update hoofdthema</value>
+    </data>
+    <data name="add_flow" xml:space="preserve">
+        <value>Voeg een nieuwe flow toe</value>
+    </data>
+    <data name="short_description" xml:space="preserve">
+        <value>Korte beschrijving</value>
+    </data>
+    <data name="attendant_name" xml:space="preserve">
+        <value>Naam begeleider</value>
+    </data>
+    <data name="choose_runningflow" xml:space="preserve">
+        <value>Welke flow wilt u tonen op het scherm</value>
+    </data>
+    <data name="survey" xml:space="preserve">
+        <value>Enquête</value>
+    </data>
+    <data name="your_account" xml:space="preserve">
+        <value>Uw account</value>
+    </data>
+    <data name="choice_language" xml:space="preserve">
+        <value>Kies uw taal</value>
+    </data>
+    <data name="hello" xml:space="preserve">
+        <value>Hallo</value>
+    </data>
+    <data name="register" xml:space="preserve">
+        <value>Registreer</value>
+    </data>
+    <data name="error_accured" xml:space="preserve">
+        <value>Er is een fout opgetreden bij het verwerken van uw verzoek</value>
+    </data>
+    <data name="development" xml:space="preserve">
+        <value>Ontwikkelingsmodus</value>
+    </data>
+    <data name="development_mode" xml:space="preserve">
+        <value>Ontwikkeling</value>
+    </data>
+    <data name="swapping_to" xml:space="preserve">
+        <value>Veranderen naar</value>
+    </data>
+    <data name="environment" xml:space="preserve">
+        <value>omgeving zal meer gedetaileerde informatie tonen over de voorkomende error</value>
+    </data>
+    <data name="development_environment" xml:space="preserve">
+        <value>De ontwikkeling omgeving zou niet ingeschakeld mogen zijn for deployed applicaties</value>
+    </data>
+    <data name="sensitive_info" xml:space="preserve">
+        <value>Dit kan leiden tot het tonen van gevoelige informatie van uitzonderingen aan eindgebruikers.
+    Schakel de optie</value>
+    </data>
+    <data name="setting" xml:space="preserve">
+        <value>omgeving door de setting </value>
+    </data>
+    <data name="environment_variable" xml:space="preserve">
+        <value>op de waarde te zetten van </value>
+    </data>
+    <data name="restart" xml:space="preserve">
+        <value>en de applicatie opnieuw op te starten</value>
+    </data>
+    <data name="themes_of" xml:space="preserve">
+        <value>Themas van</value>
+    </data>
+    <data name="comment" xml:space="preserve">
+        <value>Commentaar</value>
+    </data>
+    <data name="theme_info" xml:space="preserve">
+        <value>Thema informatie</value>
+    </data>
+    <data name="theme_name" xml:space="preserve">
+        <value>Thema naam</value>
+    </data>
+    <data name="back_to_selection" xml:space="preserve">
+        <value>Terug naar thema selectie</value>
+    </data>
+    <data name="leave_comment" xml:space="preserve">
+        <value>Laat een commentaar achter</value>
+    </data>
+    <data name="appreciate" xml:space="preserve">
+        <value>We apprecieren uw participatie zeer erg.
+Nog eens bedankt!</value>
+    </data>
+    <data name="thank_you_participate" xml:space="preserve">
+        <value>Dank je wel om deel te nemen aan Phygital tool!</value>
+    </data>
+    <data name="participate" xml:space="preserve">
+        <value>Zou je graag je informatie achterlaten opdat we je kunnen informeren over andere evenementen</value>
+    </data>
+    <data name="more_info" xml:space="preserve">
+        <value>Ontvang meer info over andere evenementen</value>
+    </data>
+    <data name="make_multiple_choice" xml:space="preserve">
+        <value>Maak 1 of meerdere keuzes</value>
+    </data>
+    <data name="make_1_choice" xml:space="preserve">
+        <value>Maak 1 keuze</value>
+    </data>
+    <data name="multiple_choice" xml:space="preserve">
+        <value>Meerkeuze</value>
+    </data>
+    <data name="open_question" xml:space="preserve">
+        <value>Open vraag</value>
+    </data>
+    <data name="range_choice" xml:space="preserve">
+        <value>Bereik vraag</value>
+    </data>
+    <data name="single_choice" xml:space="preserve">
+        <value>Enkele keuze</value>
+    </data>
+    <data name="create_step" xml:space="preserve">
+        <value>Creëer een nieuwe stap</value>
+    </data>
+    <data name="give_name_step" xml:space="preserve">
+        <value>Geef de stap een naam</value>
+    </data>
+    <data name="what_question" xml:space="preserve">
+        <value>Welke vraag wilt u graag stellen?</value>
+    </data>
+    <data name="what_answeroption" xml:space="preserve">
+        <value>Wat zijn de antwoordopties</value>
+    </data>
+    <data name="give_theme" xml:space="preserve">
+        <value>Geef het een thema</value>
+    </data>
+    <data name="answers" xml:space="preserve">
+        <value>Antwoorden</value>
+    </data>
+    <data name="what_info" xml:space="preserve">
+        <value>Welke informatie wilt u delen</value>
+    </data>
+    <data name="what_title" xml:space="preserve">
+        <value>Wat is de titel</value>
+    </data>
+    <data name="file" xml:space="preserve">
+        <value>Bestand</value>
+    </data>
+    <data name="image_video" xml:space="preserve">
+        <value>Afbeelding, Video of Audio</value>
+    </data>
+    <data name="conditional_points" xml:space="preserve">
+        <value>Conditioneel punt</value>
+    </data>
+    <data name="step" xml:space="preserve">
+        <value>Stap</value>
+    </data>
+    <data name="answeroption" xml:space="preserve">
+        <value>Antwoordoptie</value>
+    </data>
+    <data name="change_cp" xml:space="preserve">
+        <value>Update conditioneel punt</value>
+    </data>
+    <data name="delete_cp" xml:space="preserve">
+        <value>Verwijder conditionele step</value>
+    </data>
+    <data name="question" xml:space="preserve">
+        <value>Vraag</value>
+    </data>
+    <data name="question_type" xml:space="preserve">
+        <value>Type vraag</value>
+    </data>
+    <data name="info_project" xml:space="preserve">
+        <value>Informatie over het project</value>
+    </data>
+    <data name="text" xml:space="preserve">
+        <value>Tekst</value>
+    </data>
+    <data name="closed" xml:space="preserve">
+        <value>Afgesloten</value>
+    </data>
+    <data name="notes" xml:space="preserve">
+        <value>Notities</value>
+    </data>
+    <data name="add_notes" xml:space="preserve">
+        <value>Voeg een notitie toe</value>
+    </data>
+    <data name="stay_updated_q" xml:space="preserve">
+        <value>Als u op de hoogte gehouden wil worden, dan kan u uw informatie hier achterlaten</value>
+    </data>
+    <data name="stay_updated_a" xml:space="preserve">
+        <value>Ik wil op de hoogte gehouden worden</value>
+    </data>
+    <data name="no_update" xml:space="preserve">
+        <value>Ik wil niet op de hoogte worden gehouden</value>
+    </data>
+    <data name="fill_info_q" xml:space="preserve">
+        <value>Als u uw gegevens al hebt ingegeven, dan kan u uw e-mail achterlaten</value>
+    </data>
+    <data name="fill_info_a" xml:space="preserve">
+        <value>Ik heb mijn gegevens al achtergelaten</value>
+    </data>
+    <data name="remove" xml:space="preserve">
+        <value>Verwijder</value>
+    </data>
+    <data name="step_name" xml:space="preserve">
+        <value>Stap naam</value>
+    </data>
+    <data name="created_by" xml:space="preserve">
+        <value>Gecreëerd door</value>
+    </data>
+    <data name="thank_you" xml:space="preserve">
+        <value>Dank u wel!</value>
+    </data>
+    <data name="go_back" xml:space="preserve">
+        <value>Keer u terug tot het grote scherm</value>
+    </data>
+    <data name="answer_mobile" xml:space="preserve">
+        <value>Antwoord op je mobiel</value>
+    </data>
+    <data name="press_f" xml:space="preserve">
+        <value>Druk op de F toets om de enquête te starten</value>
+    </data>
+    <data name="buttons_infront" xml:space="preserve">
+        <value>De knoppen voor u zullen u helpen de vragen te beantwoorden.</value>
+    </data>
+    <data name="select_colour" xml:space="preserve">
+        <value>Kies op je kleur</value>
+    </data>
+    <data name="color" xml:space="preserve">
+        <value>Kleur</value>
+    </data>
+    <data name="font" xml:space="preserve">
+        <value>Lettertype</value>
+    </data>
+    <data name="primary_colour" xml:space="preserve">
+        <value>Primaire kleur </value>
+    </data>
+    <data name="update" xml:space="preserve">
+        <value>Update   </value>
+    </data>
+    <data name="modal_title" xml:space="preserve">
+        <value>Modal titel</value>
+    </data>
+    <data name="flow_name" xml:space="preserve">
+        <value>Flow naam </value>
+    </data>
+    <data name="flow_cannot_open" xml:space="preserve">
+        <value>De flow kan niet geopend worden want het project is inactief</value>
+    </data>
+    <data name="flow_closed" xml:space="preserve">
+        <value>Als de flow afgesloten is, dan kan de begeleider geen flow opstarten.</value>
+    </data>
+    <data name="project_inactive" xml:space="preserve">
+        <value>Dit project is op dit moment inactief. Als gevolg zijn alle flows afgesloten. Begeleiders zullen niet in staat zijn een nieuwe flow te instatiëren.</value>
+    </data>
+    <data name="theme_details" xml:space="preserve">
+        <value>Thema details</value>
+    </data>
+    <data name="confirmation" xml:space="preserve">
+        <value>Bevestiging</value>
+    </data>
+    <data name="attendants" xml:space="preserve">
+        <value>Begeleiders</value>
+    </data>
+    <data name="project_details" xml:space="preserve">
+        <value>Project details   </value>
+    </data>
+    <data name="end_session" xml:space="preserve">
+        <value>Beëindig sessie</value>
+    </data>
+    <data name="attendant_reassign" xml:space="preserve">
+        <value>Ga naar de begeleider details pagina om een project opnieuw toe te wijzen</value>
+    </data>
+    <data name="username" xml:space="preserve">
+        <value>Gebruikersnaam</value>
+    </data>
+    <data name="terug_project" xml:space="preserve">
+        <value>Terug naar project</value>
+    </data>
+    <data name="terug_flow" xml:space="preserve">
+        <value>erug naar flow</value>
+    </data>
+    <data name="warning_cs" xml:space="preserve">
+        <value>U hebt nog geen voorwaardelijke stap of al uw voorwaardelijke stappen zijn toegewezen. Maak een nieuwe aan voordat u een voorwaardelijk punt toevoegt.</value>
+    </data>
+    <data name="note_warning_subtheme" xml:space="preserve">
+        <value>Je hebt momenteel geen thema. Maak er een aan voordat u doorgaat.</value>
+    </data>
+    <data name="closed_project" xml:space="preserve">
+        <value>Het project is momenteel gesloten. Neem contact op met uw organisatie om dit proces te starten.</value>
+    </data>
+    <data name="no_assigned_flow" xml:space="preserve">
+        <value>U heeft momenteel geen toegewezen flows.
+ Neem contact op met uw organisatie voor verdere hulp.</value>
+    </data>
+    <data name="closed_flow" xml:space="preserve">
+        <value>De flow is momenteel gesloten. Neem contact op met uw organisatie om dit proces te starten.</value>
+    </data>
+    <data name="no_step" xml:space="preserve">
+        <value>De flow kent geen stappen. Neem contact op met uw organisatie om dit proces te starten.</value>
+    </data>
+    <data name="no_note" xml:space="preserve">
+        <value>Je hebt geen notitie. Maak er alstublieft een.</value>
+    </data>
+    <data name="required_birthday" xml:space="preserve">
+        <value>* Ouder dan 16 jaar</value>
+    </data>
+    <data name="test_flow" xml:space="preserve">
+        <value>Test de survey</value>
+    </data>
+    <data name="add_conditional_step" xml:space="preserve">
+        <value>Voeg conditionele stap toe</value>
+    </data>
+    <data name="project" xml:space="preserve">
+        <value>Project</value>
+    </data>
+    <data name="description" xml:space="preserve">
+        <value>Beschrijving</value>
+    </data>
+    <data name="password" xml:space="preserve">
+        <value>Paswoord</value>
+    </data>
+    <data name="least_characters" xml:space="preserve">
+        <value>Minimum 6 karakters</value>
+    </data>
+    <data name="uppcase_letter" xml:space="preserve">
+        <value>Bevat een hoofdletter</value>
+    </data>
+    <data name="special_character" xml:space="preserve">
+        <value>Bevat een speciaal karakter (#)</value>
+    </data>
+    <data name="select_color" xml:space="preserve">
+        <value>Klik op je kleur</value>
+    </data>
+    <data name="press_button" xml:space="preserve">
+        <value>Druk op de groene knop voor uw survey te starten!</value>
+    </data>
+</root>

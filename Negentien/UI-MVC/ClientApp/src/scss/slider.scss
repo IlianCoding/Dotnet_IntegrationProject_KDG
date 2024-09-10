@@ -1,0 +1,78 @@
+﻿/* Carousel on the startsurvey page */
+.buttonSurvey {
+  border: none;
+  cursor: pointer;
+  color: white;
+  background: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.slideShow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.slideShowContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 80px;
+  padding: 75px 0;
+  transition: all 0.25s ease-in;
+}
+
+.slideShowContainer #item-list {
+  width: 70vw;
+  min-height: 50vh;
+  padding: 50px 10px;
+  display: flex;
+  gap: 50px;
+  scroll-behavior: smooth;
+  transition: all 0.25s ease-in;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow: auto;
+  scroll-snap-type: x mandatory;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+#prev-btn {
+  background: none;
+  cursor: pointer;
+}
+
+#next-btn {
+  cursor: pointer;
+}
+
+#item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  scroll-snap-align: center;
+  min-width: 226px;
+  background-image: url("https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  opacity: 0.75;
+  border-radius: 25px;
+  box-shadow: #ffa97d 0px 20px 30px -10px;
+  min-height: 35vh;
+}
+
+.item-text {
+  font-size: 20px;
+  margin: 15px;
+  color: #565554;
+}
+
+.start-survey-button {
+  max-width: 15vh;
+}

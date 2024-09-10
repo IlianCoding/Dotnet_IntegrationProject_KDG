@@ -1,0 +1,105 @@
+﻿@using NT.BL.Domain.flowpck
+@using NT.BL.Domain.users
+@using NT.UI.MVC.Resources
+@model NT.BL.Domain.projectpck.Project
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+    var count = 0;
+}
+
+@section Scripts
+{
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/site.css" defer></script>
+    <script src="~/dist/AttendantFlows.entry.js" defer></script>
+    <script src="~/dist/flowOverview.entry.js" defer></script>
+
+
+}
+
+<div id="platformData"
+     data-project-id="@Model.Id">
+</div>
+<h2 class="text-center  display-4">@Resources.project: @Model.Name</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h5>@Resources.theme</h5>
+                    <h2 class="card-title">@Model.Theme.ThemeName</h2>
+                </div>
+                <div class="card-body">
+                    <h5>@Resources.description</h5>
+                    <p class="card-text" style="white-space: nowrap;">@Model.Theme.ShortInformation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+@if (Model.IsActive)
+{
+    <div class="container">
+        <div class="row">
+            @foreach (Flow flow in Model.Flows)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">@flow.FlowName</h5>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-flex align-items-center">
+                                        <label class="fw-bold me-2">@Resources.state</label>
+                                        <p class="card-text mb-0">@flow.State</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-flex align-items-center">
+                                        <label class="fw-bold me-2">@Resources.flow</label>
+                                        <p class="card-text mb-0">@(flow.IsLinear ? "Linear" : "Circular")</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-flex align-items-center">
+                                        <label class="fw-bold me-2">@Resources.total_running</label>
+                                        <p class="card-text mb-0">
+                                            @flow.RunningFlows.Count(fl => User.Identity != null && fl.State != State.Closed && (User.Identity.Name == fl.CreatedAttendantName ||
+                                                                                                                                 User.IsInRole(CustomIdentityConstants.Organization) ||
+                                                                                                                                 User.IsInRole(CustomIdentityConstants.HeadOfPlatform)))
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a asp-controller="Flow" asp-action="AttendantFlowDetail" asp-route-id="@flow.Id" class="btn btn-primary btn-block">@Resources.detail</a>
+                        </div>
+                    </div>
+                </div>
+                count++;
+            }
+
+        </div>
+    </div>
+    <br>
+    <br>
+@if (count == 0)
+{
+    <div class="alert alert-warning border border-warning">
+        @Resources.no_assigned_flow
+    </div>
+}
+}
+else
+{
+    <div class="alert alert-danger border border-danger">
+        @Resources.closed_project
+    </div>
+}

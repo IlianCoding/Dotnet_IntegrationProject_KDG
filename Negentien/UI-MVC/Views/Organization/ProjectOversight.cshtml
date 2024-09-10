@@ -1,0 +1,140 @@
+﻿@using NT.BL.Domain.flowpck
+@using NT.BL.Domain.projectpck
+@using NT.UI.MVC.Resources
+@model NT.BL.Domain.platformpck.Platform
+
+@{
+    ViewBag.Title = "OversightSharingPlatform";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/logo.entry.js" defer></script>
+    <script src="~/dist/DeleteProject.entry.js" defer></script>
+    <link rel="stylesheet" href="~/dist/logo.css">
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Organization Home Page</title>
+</head>
+<body>
+<div id="platformData"
+     data-platform-logo="@Model.LogoObjectName">
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Logo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="justify-content-center">
+                    <div class="d-flex justify-content-center mb-4">
+                        <div class="col-6 ">
+                            <!-- Adjust the column width as needed -->
+                            <img id="selectedAvatar" src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                                 class="rounded-circle img-fluid" alt="example placeholder"/>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
+                            <label class="form-label text-white m-1" for="customFile2">@Resources.file</label>
+                            <form id="logo-form">
+                                <input name="file" type="file" accept="image/*" class="form-control d-none" id="customFile2"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resources.close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" value="@Model.Id" id="save-logo">@Resources.confirm_changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-container text-center">
+    <h1>@Model.PlatformName</h1>
+    <div class="d-flex justify-content-center mt-5">
+        <h2>@Resources.all_projects</h2>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>@Resources.name</th>
+            <th>@Resources.active</th>
+            <th>@Resources.theme</th>
+            <th>@Resources.flows</th>
+            <th></th>
+            <th>@Resources.remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Project project in Model.ProjectsAssigned)
+        {
+            <tr>
+                <td>@project.Name</td>
+                @if (project.IsActive)
+                {
+                    <td>@Resources.active</td>
+                }
+                else
+                {
+                    <td>@Resources.inactive</td>
+                }
+                <td>@project.Theme.ThemeName</td>
+                <td>
+                    @if (project.Flows != null)
+                    {
+                        <ul>
+                            @foreach (Flow flows in project.Flows)
+                            {
+                                <li>@flows.FlowName</li>
+                            }
+                        </ul>
+                    }
+                </td>
+                <td>
+                    <a asp-controller="Project" asp-action="ProjectDetail" asp-route-id="@project.Id">@Resources.details</a>
+                </td>
+                <td>
+                    <button class="delete-button btn-danger" data-id="@project.Id">@Resources.remove</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5">
+                <a asp-controller="Project" asp-action="AddProject" class="add-link">@Resources.add_project</a>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 text-left">
+                <a asp-controller="Organization" asp-action="AddOrganizationMember" class="add-link btn btn-primary">@Resources.add_organisation_member</a>
+            </div>
+            <div class="col-md-6 col-sm-12 text-center">
+                <a asp-controller="Organization" asp-action="OrganizationStatistics" asp-route-platformId="@Model.Id" class="btn btn-primary">Your Statistics</a>
+            </div>
+            <div class="col-md-6 col-sm-12 text-right">
+                <a asp-controller="Organization" asp-action="AttendentDetails" class="btn btn-primary">@Resources.attendant_details</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

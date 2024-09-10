@@ -1,0 +1,62 @@
+@using NT.UI.MVC.Resources
+@model NT.UI.MVC.Models.NewFlowViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+
+<h2>Flow</h2>
+
+@{
+    string projectId = Context.Request.Query["projectId"];    
+
+<form asp-controller="Flow" asp-action="AddFlow" asp-route-projectId="@projectId" as method="post">
+    <div class="form-group my-3 ">
+        <label asp-for="FlowName">@Resources.name </label>
+        <span class="required-label">@Resources.required</span>
+        <input asp-for="FlowName" class="form-control"/>
+        <span asp-validation-for="FlowName" class="text-danger"></span>
+    </div>
+    @if (@Model.IsActive)
+    {
+        <div class="form-group row my-3">
+            <label class="col-2">@Resources.state </label>
+            <div class="form-check form-switch  col-4">
+                <span class="required-label">@Resources.required</span>
+                <input asp-for="State" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                <label id="label-status" class="form-check-label" for="flexSwitchCheckDefault">@Resources.flow_enable</label>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group row my-3">
+            <label class="col-2">@Resources.state </label>
+            <div class="form-check form-switch  col-4">
+                <span class="required-label">@Resources.required</span>
+                <input asp-for="State" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" disabled>
+                <label id="label-status" class="form-check-label" for="flexSwitchCheckDefault">@Resources.flow_enable</label>
+            </div>
+        </div>
+    }
+    
+    <div class="form-group row my-3">
+        <label class="col-2">@Resources.flow_type</label>
+        <div class="form-check form-switch  col-4">
+            <span class="required-label">@Resources.required</span>
+            <input asp-for="IsLinear" class="form-check-input btn btn-primary" type="checkbox" id="isLinear" checked>
+            <label id="label-is-linear" class="form-check-label" for="isLinear">@Resources.lineair_flow</label>
+        </div>
+    </div>
+    <button class="btn btn-primary"  >@Resources.create_flow</button>
+</form>
+}
+
+@section Scripts
+{
+    <script src="~/dist/radiobutton.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/site.entry.js" defer></script>
+}

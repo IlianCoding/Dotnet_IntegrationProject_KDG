@@ -1,0 +1,30 @@
+﻿@using NT.UI.MVC.Resources
+@model dynamic
+
+@{
+    ViewBag.Title = "All Projects";
+    Layout = "_Layout";
+}
+@section Scripts
+{
+    <script src="~/dist/AllProjects.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/site.entry.js" defer></script>
+}
+
+<h2>@Resources.all_projects</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>@Resources.name</th>
+        <th>@Resources.state</th>
+        <th>@Resources.theme</th>
+    </tr>
+    </thead>
+    <tbody id="projectsTableBody">
+    
+    </tbody>
+</table>
+
+<button class="btn btn-primary" type="button" id="AddProject">@Resources.add_project</button>
+

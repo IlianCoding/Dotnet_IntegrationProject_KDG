@@ -1,0 +1,41 @@
+{
+  "name": "net7npmwebpack",
+  "description": "Integration project with ASP.NET Core MVC project that uses npm and webpack front-end configuration.",
+  "repository": "https://gitlab.com/kdg-ti/integratieproject-1/202324/19_negentien/dotnet",
+  "license": "MIT",
+  "version": "5.0.0",
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "bootstrap5-toggle": "^5.0.4",
+    "chart.js": "^4.2.1",
+    "fs": "^0.0.1-security",
+    "jquery": "^3.7.1",
+    "jquery-validation": "^1.20.0",
+    "jquery-validation-unobtrusive": "^4.0.0"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.5",
+    "@types/bootstrap": "^5.2.10",
+    "@types/chart.js": "^2.9.41",
+    "@types/jquery": "^3.5.29",
+    "css-loader": "^6.11.0",
+    "glob": "^10.3.12",
+    "mini-css-extract-plugin": "^2.9.0",
+    "node-sass": "^9.0.0",
+    "sass": "1.72.0",
+    "sass-loader": "^14.2.1",
+    "style-loader": "^3.3.4",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.3",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch"
+  }
+}
+

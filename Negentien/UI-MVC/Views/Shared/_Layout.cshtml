@@ -1,0 +1,117 @@
+﻿@using NT.BL.Domain.users
+@using NT.UI.MVC.Resources
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - UI_MVC</title>
+    @await RenderSectionAsync("Scripts", required: false)
+    <link rel="stylesheet" href="~/dist/site.css">
+</head>
+
+@section Scripts {
+    <script src="~/dist/site.entry.js" defer></script>
+}
+
+<body>
+<header class="header_section">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <span>
+                    Phygital
+                </span>
+            </a>
+            @if (!User.IsInRole(CustomIdentityConstants.Attendent))
+            {
+                <div class="col-1" id="logo-change">
+
+                </div>
+            }
+            else
+            {
+                <div class="col-1" id="logo-static">
+
+                </div>
+            }
+
+            <div class="" id="">
+                <div class="custom_menu-btn">
+                    <button id="navbar_button">
+                        <span class="s-1"> </span>
+                        <span class="s-2"> </span>
+                        <span class="s-3"> </span>
+                    </button>
+                    <div id="myNav" class="overlay">
+                        <div class="overlay-content">
+
+                            @if (User.IsInRole(CustomIdentityConstants.HeadOfPlatform))
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="HeadOfPlatform" asp-action="Oversight">Home</a>
+                            }
+                            else if (User.IsInRole(CustomIdentityConstants.Organization))
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Organization" asp-action="ProjectOversight">Home</a>
+                            }
+                            else if (User.IsInRole(CustomIdentityConstants.Attendent))
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Attendent" asp-action="AttendantFlowOverview">Home</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            }
+                            @if (User.IsInRole(CustomIdentityConstants.Organization) || User.IsInRole(CustomIdentityConstants.Attendent))
+                            {
+                                <a class="nav-link" asp-controller="RunningFlow" asp-action="GetAllRunningFlow">Surveys</a>
+                            }
+                            @if (User.Identity != null && User.Identity.IsAuthenticated)
+                            {
+                            }
+                            else
+                            {
+                                <a class="nav-link" id="loginAtten" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                            }
+                            @if (User.Identity != null && User.Identity.IsAuthenticated)
+                            {
+                                <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Your account</a>
+                                <form id="logout_form" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                    <button type="submit" class="nav-link" id="logout_button">Logout</button>
+                                </form>
+                            }
+                            <div class="dropdown">
+                                <button id="dropdownbutton" class="dropbtn">@Resources.choice_language</button>
+                                <div class="dropdown-content">
+                                    <a href="~/api/Localizations/English">en-GB</a>
+                                    <a rel="noopener" href="~/api/Localizations/Nederlands">nl-BE</a>
+                                    <a rel="noopener" href="~/api/Localizations/Français">fr-FR</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="footer_section">
+    <div class="container">
+        <p>
+            @RenderSection("FooterContent", required: false)
+            <a class="" asp-controller="HeadOfPlatform" asp-action="PrivacyDeclaration">Privacy: @Url.ActionLink("PrivacyDeclaration", "HeadOfPlatform")</a>
+            <br>
+            &copy; <span id="displayYear"></span> All Rights Reserved By
+            <a href="https://www.kdg.be/">Karel de Grote Hogeschool</a>
+        </p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,64 @@
+﻿@using Humanizer.Localisation
+@using NT.UI.MVC.Resources
+@using Resources = NT.UI.MVC.Resources.Resources
+@{
+    ViewBag.Title = "Add Project";
+    Layout = "_Layout";
+}
+
+@section Scripts{
+    <script src="~/dist/AddProject.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/site.css" defer></script>
+}
+
+<h2>@Resources.add_project</h2>
+<form>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" for="projectName">@Resources.project_name</label>
+        <div class="col-sm-10">
+            <span class="required-label">@Resources.required</span>
+            <input class="form-control" id="projectName">
+        </div>
+        <span class="text-danger" id="projectNameSpan"></span>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" for="projectInformation">@Resources.project_info</label>
+        <div class="col-sm-10">
+            <input class="form-control" id="projectInformation">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">@Resources.state</label>
+        <div class="col-sm-10">
+            <div class="mb-3 col">
+                <div class="form-check form-check-inline">
+                    <input name="isActive" id="radioTrue" class="form-check-input" type="radio" value="true">
+                    <label for="radioTrue" class="form-check-label">@Resources.active</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input name="isActive" id="radioFalse" class="form-check-input" type="radio" value="false" checked>
+                    <label for="radioFalse" class="form-check-label">@Resources.inactive</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" for="headThemeName">@Resources.head_theme_name</label>
+        <div class="col-sm-10">
+            <span class="required-label">@Resources.required</span>
+            <input class="form-control" id="headThemeName" required="required">
+        </div>
+        <span class="text-danger" id="headThemeSpan"></span>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" for="headThemeDescription">@Resources.head_theme_description</label>
+        <div class="col-sm-10">
+            <span class="required-label">@Resources.required</span>
+            <input class="form-control" id="headThemeDescription" required="required">
+        </div>
+        <span class="text-danger" id="headThemeDescriptionSpan"></span>
+    </div>
+
+    <button id="addProjectButton" type="button" class="btn btn-primary btn-outline-primary">@Resources.add_project</button>
+</form>

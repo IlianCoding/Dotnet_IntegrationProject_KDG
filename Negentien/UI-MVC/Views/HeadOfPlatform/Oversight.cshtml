@@ -1,0 +1,79 @@
+﻿@using NT.BL.Domain.platformpck
+@using Microsoft.AspNetCore.Identity
+@using NT.UI.MVC.Resources
+@model ICollection<NT.BL.Domain.platformpck.Platform>
+
+@{
+    ViewBag.Title = "HeadPlatformHomePage";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HeadPlatformHomePage</title>
+</head>
+<body>
+<div class="table-container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>@Resources.name</th>
+            <th>@Resources.maintainer</th>
+            <th>@Resources.number_project</th>
+            <th>@Resources.creation_date</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Platform platform in Model)
+        {
+            <tr>
+                <td>@platform.PlatformName</td>
+                <td>
+                    @if (platform.OrganizationMaintainer != null)
+                    {
+                        <ul>
+                            @foreach (IdentityUser organizationMaintainers in platform.OrganizationMaintainer)
+                            {
+                                <li>@organizationMaintainers.UserName</li>
+                            }
+                        </ul>
+                    }
+                </td>
+                @if (platform.ProjectsAssigned != null)
+                {
+                    <td>@platform.ProjectsAssigned.Count</td>
+                }
+                else
+                {
+                    <td>0</td>
+                }
+                <td>@platform.CreationDate.Day/@platform.CreationDate.Month/@platform.CreationDate.Year</td>
+                <td>
+                    <a asp-controller="HeadOfPlatform" asp-action="Details" asp-route-id="@platform.Id">@Resources.details</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5">
+                <a asp-controller="HeadOfPlatform" asp-action="Add" class="add-link">@Resources.add_platform</a>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+ <a  asp-controller="HeadOfPlatform" asp-action="HeadPlatformStatistics"  class="btn btn-primary">Your statistics</a>
+</div>
+</body>
+</html>

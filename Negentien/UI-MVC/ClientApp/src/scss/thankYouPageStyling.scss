@@ -1,0 +1,44 @@
+﻿body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+//.cta-section {
+//  display: flex;
+//  justify-content: space-between;
+//  align-items: center;
+//  margin-top: 50px;
+//}
+//
+//.cta-section div:first-child {
+//  text-align: left;
+//}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.cta-buttons a {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #000;
+}
+
+.cta-buttons a:hover {
+  background-color: #ddd;
+}

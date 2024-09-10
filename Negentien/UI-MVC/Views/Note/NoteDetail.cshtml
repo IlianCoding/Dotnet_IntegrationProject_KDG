@@ -1,0 +1,81 @@
+﻿@using NT.BL.Domain.users
+@using NT.UI.MVC.Resources
+@{
+    ViewBag.Title = "Note Detail Page";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/NoteDetailPage.entry.js" defer></script>
+    <script src="~/dist/DeleteNote.entry.js" defer></script>
+}
+@if (User.IsInRole(CustomIdentityConstants.Organization) || User.IsInRole(CustomIdentityConstants.HeadOfPlatform))
+{
+    <a asp-controller="Flow" asp-action="FlowDetail" asp-route-id="@ViewBag.Flow.Id" class="btn btn-outline-primary btn-return col-sm-3">Go back to flow detail page</a>
+}
+else if(User.IsInRole(CustomIdentityConstants.Attendent))
+{
+    <a asp-controller="Flow" asp-action="AttendantFlowDetail" asp-route-id="@ViewBag.Flow.Id" class="btn btn-outline-primary btn-return col-sm-3">Go back to notes</a>
+}
+
+<h1>Note Detail</h1>
+<div id="editNote">
+    <form>
+        <div class="mb-3 row">
+            <label class="col-sm-2 form-label fw-bold" for="editNoteTitle">@Resources.title</label>
+            <div class="col-sm-10 d-flex align-items-end">
+                <div class="flex-grow-1 me-3">
+                    <span class="required-label">@Resources.required</span>
+                    <input class="form-control" id="editNoteTitle" value="@Model.NoteTitle" placeholder="Enter Title">
+                    <span class="text-danger" id="noteTitleErrorSpan"></span>
+                </div>
+                <button type="button" class="btn align-self-end btn-danger" id="removeNoteButton">@Resources.remove</button>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label class="col-sm-2 form-label fw-bold" for="editNoteText">@Resources.text</label>
+            <div class="col-sm-10">
+                <span class="required-label">@Resources.required</span>
+                <textarea class="form-control" id="editNoteText" rows="3" placeholder="Enter Text">@Model.NoteText</textarea>
+                <span class="text-danger" id="noteTextError"></span>
+            </div>
+        </div>
+    </form>
+    <div class="row mb-3">
+        <span class="col-sm-2 form-label fw-bold">@Resources.created_by</span>
+        <span class="col-sm-10">@Model.CreatedAttendantName</span>
+    </div>
+    <div class="row mb-3">
+        <span class="col-sm-2 form-label fw-bold">@Resources.step_name</span>
+        <span class="col-sm-10">@Model.Step.Name</span>
+    </div>
+    <button type="button" id="confirmNoteButton" class="btn btn-primary">@Resources.confirm_changes</button>
+</div>
+
+<div id="detailNote">
+    <div class="row mb-3">
+        <span class="col-sm-2 form-label fw-bold">@Resources.title</span>
+        <span class="col-sm-10" id="detailNoteTitleSpan">@Model.NoteTitle</span>
+    </div>
+    <div class="row mb-3">
+        <span class="col-sm-2 form-label fw-bold">@Resources.text</span>
+        <span class="col-sm-10" id="detailNoteTextSpan">@Model.NoteText</span>
+    </div>
+    <div class="row mb-3">
+        <span class="col-sm-2 form-label fw-bold">@Resources.created_by</span>
+        <span class="col-sm-10">@Model.CreatedAttendantName</span>
+    </div>
+    <div class="row mb-3">
+        <span class="col-sm-2 form-label fw-bold">@Resources.step_name</span>
+        <span class="col-sm-10">@Model.Step.Name</span>
+    </div>
+    @if (User.Identity != null && User.Identity.Name == @Model.CreatedAttendantName)
+    {
+        <button class="btn btn-primary" id="editNoteButton">@Resources.edit</button>
+    }
+</div>

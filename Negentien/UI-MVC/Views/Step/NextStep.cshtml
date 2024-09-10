@@ -1,0 +1,271 @@
+﻿@using NT.BL.Domain.flowpck
+@using NT.BL.Domain.questionpck.AnswerDomPck
+@using NT.BL.Domain.questionpck.QuestionDomPck
+@using NT.UI.MVC.Resources
+
+@model NT.UI.MVC.Models.SurveyViewModel
+
+@{
+    ViewBag.Title = "NextStep";
+    Layout = "_Layout";
+    var colors = new List<string> { "DarkGoldenRod", "green", "DarkSlateGray", "blue", "red" };
+    var inputCounter = 0;
+}
+<style>
+    .qr-code-container {
+        position: absolute;
+        top: 10px; /* Adjust as needed */
+        right: 50px; /* Adjust as needed */
+    }
+</style>
+
+<div class="step-id-logo" data-step-logo="@Model.Step.Id" ></div>
+
+@if (Model.IsKiosk)
+{
+    @section Scripts
+    {
+        <script src="~/dist/nextStep.entry.js" defer></script>
+        <script src="~/dist/home.entry.js" defer></script>
+        <script src="~/dist/site.entry.js" defer></script>
+        <script src="~/dist/StepStyling.entry.js" defer></script>
+        <script src="~/dist/fileManaging.entry.js" defer></script>
+     <script src="~/dist/flowLogo.entry.js" defer></script>
+    }
+    
+    <div id="stepId" class="visually-hidden">@Model.Step.Id</div>
+    @if (Model.Step.Content is QuestionWithOption questionWithOptions)
+    {
+        <span class="question-type">questionWithOptions.QuestionType</span>
+        <div class="mb-3">
+            <h2>
+                <label class="form-label">@questionWithOptions.QuestionText</label>
+            </h2>
+            @if (questionWithOptions.QuestionType is QuestionType.Single || questionWithOptions.QuestionType is QuestionType.Range)
+            {
+                <h3 >@Resources.make_1_choice</h3>
+            }
+            else if (questionWithOptions.QuestionType is QuestionType.Multiple)
+            {
+                <h3 >@Resources.make_multiple_choice</h3>
+            }
+            @foreach (AnswerOption option in questionWithOptions.AnswerOptions)
+            {
+                var inputId = $"input_{inputCounter++}";
+                <div class="form-check">
+                    @if (questionWithOptions.QuestionType == QuestionType.Single || questionWithOptions.QuestionType == QuestionType.Range)
+                    {
+                        <input class="form-check-input" type="radio" name="@Model.Step.Id" id="@inputId" value="@option.Id">
+                    }
+                    else if (questionWithOptions.QuestionType == QuestionType.Multiple)
+                    {
+                        <input class="form-check-input" type="checkbox" name="@Model.Step.Id" id="@inputId" value="@option.Id">
+                    }
+                    <label class="form-check-label fw-bold" for="@option.Id">
+                        @option.TextAnswer
+                    </label>
+                </div>
+            }
+        </div>
+        <button id="submitAnswers" class="btn btn-primary submit-button" type="button">@Resources.submit</button>
+    }
+    else if (Model.Step.Content is QuestionOpen questionOpen)
+    {
+        <span class="question-type">questionOpen.QuestionType</span>
+        <h2>
+            <label id="openvraag" class="fw-bold">@questionOpen.QuestionText</label>
+        </h2>
+        <input form="openvraag" type="text" class="form-text" id="@Model.Step.Content.Id"/>
+        <button id="submitAnswers" class="btn btn-primary submit-button" type="button">@Resources.submit</button>
+    }
+     else if (Model.Step.Content is InformationContent information)
+    {
+        @if (Model.Step.Theme != null)
+        {
+            <div class="mb-3">
+                <label>
+
+                    @Model.Step.Theme.ThemeName
+
+                </label>
+            </div>
+        }
+        <div class="row my-2 align-content-center">
+            @if (!String.IsNullOrWhiteSpace(information.ObjectName))
+            {
+                <div class="ms-3 col-md-4 col-lg-4 col-sm-12">
+                    @if (information.ContentType?.StartsWith("image") == true)
+                    {
+                        <div class="mb-3 col-10">
+                            <img class="mt-4 media-link img-fluid" data-object-name="@information.ObjectName" src="" alt="The uploaded image will be shown here">
+                        </div>
+                    }
+                    else if (information.ContentType?.StartsWith("video") == true)
+                    {
+                        <div class="mb-3 col-10">
+                            <video id="uploaded-image" data-object-name="@information.ObjectName" class="embed-responsive-item media-link" style="max-width: 800px; max-height: 450px;" src="" type="@information.ContentType" controls></video>
+                        </div>
+                    }
+                    else if (information.ContentType?.StartsWith("audio") == true)
+                    {
+                        <div class="mb-3 col-10">
+                            <audio controls autoplay class="media-link" data-object-name="@information.ObjectName" src="" type="@information.ContentType">
+                            </audio>
+                        </div>
+                    }
+                </div>
+            }
+
+            <div class="mb-3 col-md-7 col-lg-7 col-sm-12 justify-content-center align-content-center">
+                <h2 >
+                    <label>@information.TextInformation</label>
+                </h2>
+            </div>
+        </div>
+        <button id="submitAnswers" class="btn btn-primary submit-button" type="button">@Resources.submit</button>
+    }
+
+    @section FooterContent
+    {
+        <a class="" asp-controller="Project" asp-action="ProjectInformation" asp-route-stepId="@Model.Step.Id">@Resources.project_info: @Url.ActionLink("ProjectInformation", "Project", new { stepId = Model.Step.Id })</a>
+        <br>
+    }
+}
+else
+{
+    @section Scripts
+    {
+        <script src="~/dist/nextStep.entry.js" defer></script>
+        <script src="~/dist/home.entry.js" defer></script>
+        <script src="~/dist/site.entry.js" defer></script>
+        <script src="~/dist/videoInput.entry.js" defer></script>
+        <script src="~/dist/StepStyling.entry.js" defer></script>
+        <script src="~/dist/fileManaging.entry.js" defer></script>
+        <script src="~/dist/flowLogo.entry.js" defer></script>
+    }
+    <link rel="stylesheet" href="~/dist/videoInput.css">
+    
+    @if (!Model.IsLinear)
+    {
+        <div class="container qr-code-container w-25">
+            <div class=" d-flex flex-column align-items-end justify-content-center">
+                <label class="text-center">@Resources.stay_updated_q</label>
+                <img id="qr_code_image_open" class=" w-25" src="@Url.Action("GenerateQrCode", "Qr", new { url = Url.Action("ThankYouMobilePage", "Step", new { runningFlowId = Model.RunningFlowId }) })" alt="QR Code" style="max-width: 200px;">
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div id="timer" class="text-4xl"></div>
+    </div>
+    
+    <div id="stepId" class="visually-hidden">@Model.Step.Id</div>
+    @if (Model.Step.Content is QuestionWithOption questionWithOptions)
+    {
+        <span class="question-type">questionWithOptions.QuestionType</span>
+        <div class="mb-3">
+            <h2>
+                <label class="form-label">@questionWithOptions.QuestionText</label>
+            </h2>
+            @if (questionWithOptions.QuestionType is QuestionType.Single || questionWithOptions.QuestionType is QuestionType.Range)
+            {
+                <h3>@Resources.make_1_choice</h3>
+            }
+            else if (questionWithOptions.QuestionType is QuestionType.Multiple)
+            {
+                <h3>@Resources.make_multiple_choice</h3>
+            }
+            @foreach (AnswerOption option in questionWithOptions.AnswerOptions)
+            {
+                var color = colors[inputCounter % colors.Count];
+                var inputId = $"input_{inputCounter}";
+                var labelId = $"label_{inputCounter}";
+                <div class="form-check">
+                    @if (questionWithOptions.QuestionType == QuestionType.Single || questionWithOptions.QuestionType == QuestionType.Range)
+                    {
+                        <input class="form-check-input" type="radio" name="@Model.Step.Id" id="@inputId" value="@option.Id">
+                    }
+                    else if (questionWithOptions.QuestionType == QuestionType.Multiple)
+                    {
+                        <input class="form-check-input" type="checkbox" name="@Model.Step.Id" id="@inputId" value="@option.Id">
+                    }
+                    <label id="@labelId" class="form-check-label" for="@option.Id" style="color:@color;">
+                        @option.TextAnswer
+                    </label>
+                </div>
+                inputCounter++;
+            }
+        </div>
+    }
+    else if (Model.Step.Content is QuestionOpen questionOpen)
+    {
+        <span class="question-type">questionOpen.QuestionType</span>
+        <h2>
+            <label id="openvraag">@questionOpen.QuestionText</label>
+        </h2>
+        <input form="openvraag" type="text" class="form-text" id="@Model.Step.Content.Id"/>
+
+
+        <div class="container d-flex flex-column align-items-center justify-content-center" id="qr_container_openvraag">
+            <div class=" d-flex flex-column align-items-center justify-content-center w-75">
+                <label class="text-center fs-3">@Resources.answer_mobile</label>
+                <img id="qr_code_image" class="img-fluid" src="@Url.Action("GenerateQrCode", "Qr", new { url = Url.Action("OpenRangeMobile", "Step", new { runningFlowId = Model.RunningFlowId, stepId = Model.Step.Id }) })" alt="QR Code" style="max-width: 200px;">
+            </div>
+        </div>
+    }
+    else if (Model.Step.Content is InformationContent information)
+    {
+        @if (Model.Step.Theme != null)
+        {
+            <div class="mb-3">
+                <label>
+
+                    @Model.Step.Theme.ThemeName
+
+                </label>
+            </div>
+        }
+        <div class="row my-2 align-content-center">
+            @if (!String.IsNullOrWhiteSpace(information.ObjectName))
+            {
+                <div class="ms-3 col-md-4 col-lg-4 col-sm-12">
+                    @if (information.ContentType?.StartsWith("image") == true)
+                    {
+                        <div class="mb-3 col-10">
+                            <img class="mt-4 media-link img-fluid" data-object-name="@information.ObjectName" src="" alt="The uploaded image will be shown here">
+                        </div>
+                    }
+                    else if (information.ContentType?.StartsWith("video") == true)
+                    {
+                        <div class="mb-3 col-10">
+                            <video id="uploaded-image" data-object-name="@information.ObjectName" class="embed-responsive-item media-link" style="max-width: 800px; max-height: 450px;" src="" type="@information.ContentType" controls></video>
+                        </div>
+                    }
+                    else if (information.ContentType?.StartsWith("audio") == true)
+                    {
+                        <div class="mb-3 col-10">
+                            <audio controls autoplay class="media-link" data-object-name="@information.ObjectName" src="" type="@information.ContentType">
+                            </audio>
+                        </div>
+                    }
+                </div>
+            }
+
+            <div class="mb-3 col-md-7 col-lg-7 col-sm-12 justify-content-center align-content-center">
+                <h2 >
+                    <label>@information.TextInformation</label>
+                </h2>
+            </div>
+        </div>
+    }
+
+
+    <video id="video" width="640" height="480" autoplay muted></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    
+
+    @section FooterContent
+    {
+        <a class="" asp-controller="Project" asp-action="ProjectInformation" asp-route-stepId="@Model.Step.Id">@Resources.project_info: @Url.ActionLink("ProjectInformation", "Project", new { stepId = Model.Step.Id })</a>
+        <br>
+    }
+}

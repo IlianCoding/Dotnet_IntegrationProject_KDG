@@ -1,0 +1,48 @@
+@using NT.UI.MVC.Resources
+@model NT.BL.Domain.flowpck.RunningFlow
+
+@{
+    ViewBag.Title = "Thank You Page";
+    Layout = "_Layout";
+}
+
+@section Scripts {
+    <script src="~/dist/ThankYouPage.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/site.entry.js" defer></script>
+    <link href="~/dist/ThankYouPage.css" rel="stylesheet">
+}
+
+@if (Model.IsForTesting)
+{
+    <a class="btn btn-primary" asp-controller="Flow" asp-action="FlowDetail" asp-route-id="@Model.CurrentFlow.Id">Return to details</a>
+}
+else
+{
+    <div class="container">
+        <h1>@Resources.thank_you_participate</h1>
+        <p>...</p>
+        <div>
+            <p>@Resources.stay_updated_q</p>
+            <p>@Resources.fill_info_q.</p></div>
+        @if (Model.IsKiosk)
+        {
+            <input id="flowIdThankPage" type="hidden" value="@ViewBag.Flow.Id"/>
+            <div class="cta-buttons justify-content-center mt-5">
+                <button class="btn btn-primary" id="updateButton">@Resources.stay_updated_a</button>
+                <button class="btn btn-primary" id="alreadyButton">@Resources.fill_info_a</button>
+                <button class="btn btn-primary" id="dontButton">@Resources.no_update</button>
+            </div>
+        }
+        else
+        {
+            <div class="container">
+                <div class="qr-code-container d-flex flex-column align-items-end justify-content-center">
+                    <img id="qr_code_image" class="img-fluid" src="@Url.Action("GenerateQrCode", "Qr", new { url = Url.Action("ThankYouMobilePage", "Step", new { runningFlowId = Model.Id }) })" alt="QR Code" style="max-width: 200px;">
+                    <label class="text-center">@Resources.end_session</label>
+
+                </div>
+            </div>
+        }
+    </div>
+}

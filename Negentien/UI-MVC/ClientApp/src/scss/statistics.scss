@@ -1,0 +1,39 @@
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+// Define a variable for the Roboto font family
+$helvetica-font-family: 'Helvetica Neue', sans-serif;
+$sans-font-family: 'Open Sans', sans-serif;
+
+// Apply the Roboto font to all elements
+.statistics-font-title {
+  font-family: $helvetica-font-family;
+  font-weight: bold;
+}
+
+.statistics-font-rest {
+  font-family: $sans-font-family;
+  font-style: normal;
+  font-weight: bold;
+  font-size: medium;
+  color: #4d5154;
+}
+
+
+.number-looks{
+  font-family: Arial,sans-serif;
+  font-size: xx-large;
+  font-weight: bolder;
+  color: black;
+}
+
+.statistics-background{
+  background-color: #f2f4f5;
+}
+
+.subheading{
+  font-family: Arial,sans-serif;
+  font-weight: bold;
+}

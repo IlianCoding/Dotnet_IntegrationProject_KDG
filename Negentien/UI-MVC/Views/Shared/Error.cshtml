@@ -1,0 +1,25 @@
+﻿@using NT.UI.MVC.Resources
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">@Resources.error_accured</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+
+<h3>@Resources.development_mode</h3>
+<p>
+    @Resources.swapping_to <strong>@Resources.development</strong> @Resources.environment
+</p>
+<p>
+    <strong>@Resources.development_environment.</strong>
+    @Resources.sensitive_info <strong>@Resources.development</strong> @Resources.setting <strong>ASPNETCORE_ENVIRONMENT</strong> @Resources.environment_variable <strong>@Resources.development</strong>
+    @Resources.restart
+</p>

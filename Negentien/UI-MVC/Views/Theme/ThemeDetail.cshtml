@@ -1,0 +1,67 @@
+﻿@model NT.BL.Domain.flowpck.Theme
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/UpdateThemeDetailPage.entry.js" defer></script>
+}
+<a href="/Project/ProjectDetail/@ViewBag.Project.Id" class="btn btn-outline-primary btn-return col-sm-2">Go back to project</a>
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            Theme Details
+        </div>
+        <div class="card-body">
+            <div id="editDiv">
+                <input value="@Model.Id" id="theme_id" type="hidden">
+                <div class="mb-3 row">
+                    <label class="col-sm-2 form-label fw-bold" for="editThemeNameDetail">Theme name</label>
+                    <div class="col-sm-10">
+                        <span class="required-label">* required</span>
+                        <input class="form-control" asp-for="ThemeName" id="editThemeNameDetail" placeholder="required">
+                    </div>
+                    <span class="text-danger" id="themeNameSpan"></span>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 form-label fw-bold" for="editThemeInformationDetail">Theme information</label>
+                    <div class="col-sm-10">
+                        <span class="required-label">* required</span>
+                        <input class="form-control" asp-for="ShortInformation" id="editThemeInformationDetail">
+                    </div>
+                    <span class="text-danger" id="themeInformationSpan"></span>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 form-label fw-bold">State</label>
+                    <div class="col-sm-10">
+                        <span class="col-sm-10">@(Model.IsHeadTheme ? "Head-theme" : "Sub-theme")</span>
+                    </div>
+                </div>
+                <button type="submit" id="updateTheme" class="btn btn-primary btn-outline-primary">Confirm changes</button>
+            </div>
+
+
+            <div id="detailDiv">
+                <div class="row mb-3">
+                    <span class="col-sm-2 form-label fw-bold">Theme name</span>
+                    <span class="col-sm-10" id="ThemeNameDetailSpan">@Model.ThemeName</span>
+                </div>
+                <div class="row mb-3">
+                    <span class="col-sm-2 form-label fw-bold">Theme information</span>
+                    <span class="col-sm-10" id="ThemeInformationDetailSpan">@Model.ShortInformation</span>
+                </div>
+                <div class="row mb-3">
+                    <span class="col-sm-2 form-label fw-bold">State</span>
+                    <span class="col-sm-10">@(Model.IsHeadTheme ? "Head-theme" : "Sub-theme")</span>
+                </div>
+                <button class="btn btn-primary" id="editThemeButton">Edit theme</button>
+            </div>
+        </div>
+    </div>
+</div>

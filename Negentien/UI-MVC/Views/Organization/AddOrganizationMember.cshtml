@@ -1,0 +1,68 @@
+﻿@using NT.UI.MVC.Resources
+@model NT.UI.MVC.Models.UserViewModels.NewOrganizationMemberViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/site.css" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/addingPlatformValidation.entry.js" defer></script>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@Resources.add_organisation_member</title>
+</head>
+<body>
+<h2>@Resources.enter_credentials</h2>
+<form id="myForm" asp-controller="Organization" asp-action="AddOrganizationMember" method="post">
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" asp-for="FirstName">@Resources.first_name</label>
+        <div class="col-sm-10">
+            <span class="required-label d-block">@Resources.required</span>
+            <input asp-for="FirstName">
+        </div>
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" asp-for="LastName">@Resources.last_name</label>
+        <div class="col-sm-10">
+            <span class="required-label d-block">@Resources.required</span>
+            <input asp-for="LastName">
+        </div>
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" asp-for="Email">@Resources.email_adress</label>
+        <div class="col-sm-10">
+            <span class="required-label d-block">@Resources.required</span>
+            <input asp-for="Email">
+        </div>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" asp-for="PhoneNumber">@Resources.phone_number </label>
+        <div class="col-sm-10">
+            <input asp-for="PhoneNumber">
+        </div>
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" asp-for="Birthday">@Resources.birthday</label>
+        <div class="col-sm-10">
+            <span class="required-label d-block">@Resources.required_birthday</span>
+            <input class="form-control" asp-for="Birthday" type="date" id="Birthday"/>
+        </div>
+        <span class="text-danger d-block" id="birthday-error"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">@Resources.submit_organisation</button>
+</form>
+</body>
+</html>

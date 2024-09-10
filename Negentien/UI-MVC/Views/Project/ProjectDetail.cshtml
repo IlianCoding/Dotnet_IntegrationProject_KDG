@@ -1,0 +1,323 @@
+﻿@using Humanizer.Localisation
+@using NT.BL.Domain.flowpck
+@using NT.UI.MVC.Resources
+@using Resources = NT.UI.MVC.Resources.Resources
+@model NT.BL.Domain.projectpck.Project
+
+@{
+    ViewBag.Title = "Project Detail";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/UpdateProject.entry.js" defer></script>
+    <script src="~/dist/UpdateThemeInProjectDetailPage.entry.js" defer></script>
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/addSubTheme.entry.js" defer></script>
+    <script src="~/dist/deleteSubthemeProjectDetailPage.entry.js" defer></script>
+}
+
+<h1 id="projectNameHeader">@Model.Name</h1>
+<div id="projectDetailDiv">
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-detail-tab" data-bs-toggle="pill" data-bs-target="#pills-detail" type="button" role="tab" aria-controls="pills-detail" aria-selected="true">@Resources.details</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-flows-tab" data-bs-toggle="pill" data-bs-target="#pills-flows" type="button" role="tab" aria-controls="pills-flows" aria-selected="false">@Resources.flows</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-themes-tab" data-bs-toggle="pill" data-bs-target="#pills-themes" type="button" role="tab" aria-controls="pills-themes" aria-selected="false">@Resources.subthemes</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-attendants-tab" data-bs-toggle="pill" data-bs-target="#pills-attendants" type="button" role="tab" aria-controls="pills-attendants" aria-selected="false">Attendants</button>
+    </li>
+</ul>
+
+<div class="tab-content" id="pills-tabContent">
+<div class="tab-pane fade show active" id="pills-detail" role="tabpanel" aria-labelledby="pills-detail-tab" tabindex="0">
+    <section>
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header">
+                    @Resources.project_details
+                </div>
+                <div id="noteWarning" class="alert alert-warning border border-warning">
+                    @Resources.project_inactive
+                </div>
+
+                <div class="card-body">
+                    <div id="editDiv">
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 form-label fw-bold" for="projectName">@Resources.project_name</label>
+                            <div class="col-sm-10">
+                                <span class="required-label">@Resources.required</span>
+                                <input class="form-control" asp-for="Name" id="projectName" placeholder="required">
+                            </div>
+                            <span class="text-danger" id="projectNameSpan"></span>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 form-label fw-bold" for="projectInformation">@Resources.info</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" asp-for="ProjectInformation" id="projectInformation">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 form-label fw-bold" asp-for="IsActive">@Resources.state</label>
+                            <div class="col-sm-10">
+                                <div class="mb-3 col">
+                                    <div class="form-check form-check-inline">
+                                        <input name="isActive" id="radioTrue1" class="form-check-input" type="radio" value="true">
+                                        <label for="radioTrue1" class="form-check-label">@Resources.active</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input name="isActive" id="radioFalse1" class="form-check-input" type="radio" value="false" checked>
+                                        <label for="radioFalse1" class="form-check-label">@Resources.inactive</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 form-label fw-bold" for="primaryColor">@Resources.primary_colour</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="primaryColor">
+                                    <option value="Default">Default</option>
+                                    <option value="Light Coral">Light Coral</option>
+                                    <option value="Khaki">Khaki</option>
+                                    <option value="Lavender">Lavender</option>
+                                    <option value="Thistle">Thistle</option>
+                                    <option value="Pale Turquoise">Pale Turquoise</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 form-label fw-bold" for="font">@Resources.font</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="font">
+                                    <option value="Poppins">Poppins</option>
+                                    <option value="Arial">Arial</option>
+                                    <option value="Verdana">Verdana</option>
+                                    <option value="Helvetica">Helvetica</option>
+                                    <option value="Tahoma">Tahoma</option>
+                                    <option value="Times New Roman">Times New Roman</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" id="updateProject" class="btn btn-primary btn-outline-primary">@Resources.confirm_changes</button>
+                    </div>
+
+
+                    <div id="detailDiv">
+                        <div class="row mb-3">
+                            <span class="col-sm-2 form-label fw-bold">@Resources.project_name</span>
+                            <span class="col-sm-10" id="projectNameDetailSpan">@Model.Name</span>
+                        </div>
+                        <div class="row mb-3">
+                            <span class="col-sm-2 form-label fw-bold">@Resources.info</span>
+                            @if (Model.ProjectInformation == null)
+                            {
+                                <span class="col-sm-10" id="projectInformationDetailSpan">@Resources.no_info_available</span>
+                            }
+                            else
+                            {
+                                <span class="col-sm-10" id="projectInformationDetailSpan">@Model.ProjectInformation</span>
+                            }
+                        </div>
+                        <div class="row mb-3">
+                            <span class="col-sm-2 form-label fw-bold">@Resources.state</span>
+                            <span class="col-sm-10" id="projectStatusDetailSpan">@Model.IsActive</span>
+                        </div>
+                        <div class="row mb-3">
+                            <span class="col-sm-2 form-label fw-bold">@Resources.primary_colour</span>
+                            <span class="col-sm-10" id="primaryColorDetailSpan">@Model.PrimaryColor</span>
+                        </div>
+                        <div class="row mb-3">
+                            <span class="col-sm-2 form-label fw-bold">@Resources.font</span>
+                            <span class="col-sm-10" id="fontDetailSpan">@Model.Font</span>
+                        </div>
+                        <button class="btn btn-primary" id="editProjectButton">@Resources.edit</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            @Resources.change_state
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header">
+                    @Resources.head_theme
+                </div>
+                <div class="card-body">
+
+                    <div id="editTheme">
+                        <input value="@Model.Theme.Id" id="headThemeId" type="hidden">
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 form-label fw-bold" for="editHeadthemeName">@Resources.theme_name</label>
+                            <div class="col-sm-10">
+                                <span class="required-label">@Resources.required</span>
+                                <input class="form-control" value="@Model.Theme.ThemeName" id="editHeadthemeName" placeholder="required">
+                            </div>
+                            <span class="text-danger" id="editThemeNameSpan"></span>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 form-label fw-bold" for="editThemeInformation">@Resources.theme_details</label>
+                            <div class="col-sm-10">
+                                <span class="required-label">@Resources.required</span>
+                                <input class="form-control" value="@Model.Theme.ShortInformation" id="editThemeInformation">
+                            </div>
+                            <span class="text-danger" id="editThemeDescriptionSpan"></span>
+                        </div>
+                        <button class="btn btn-primary" id="confirmThemeButton">@Resources.confirm_changes</button>
+                    </div>
+
+                    <div id="detailTheme">
+                        <div class="row mb-3">
+                            <span class="col-sm-2 form-label fw-bold">@Resources.theme_name</span>
+                            <span class="col-sm-10" id="detailThemeSpan">@Model.Theme.ThemeName</span>
+                        </div>
+                        <div class="row mb-3">
+                            <span class="col-sm-2 form-label fw-bold">@Resources.theme_details</span>
+                            <span class="col-sm-10" id="cetailThemeDescriptionSpan">@Model.Theme.ShortInformation</span>
+                        </div>
+                        <button class="btn btn-primary" id="editThemeButton">@Resources.edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="tab-pane fade" id="pills-flows" role="tabpanel" aria-labelledby="pills-flows-tab" tabindex="0">
+    <section>
+        <h3>@Resources.flows</h3>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>@Resources.name</th>
+                    <th>@Resources.state</th>
+                    <th>@Resources.flow_type</th>
+
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (Flow flow in Model.Flows)
+                {
+                    <tr>
+                        <td>@flow.FlowName</td>
+                        <td>@flow.State</td>
+                        <td>@(flow.IsLinear ? "Linear" : "Circular")</td>
+                        <td>
+                            <a asp-controller="Flow" asp-action="FlowDetail" asp-route-id="@flow.Id">@Resources.details</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <a class="btn btn-primary" asp-controller="Flow" asp-action="AddFlow" asp-route-projectId="@Model.Id">@Resources.add_flow</a>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </section>
+</div>
+<div class="tab-pane fade" id="pills-themes" role="tabpanel" aria-labelledby="pills-themes-tab" tabindex="0">
+
+    <section>
+        <h3>@Resources.subthemes</h3>
+        <div id="subThemas">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>@Resources.name</th>
+                    <th>@Resources.state</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="subThemesTBody">
+                @{
+                    int teller = 0;
+                }
+                @foreach (Theme theme in Model.Theme.Subthemes)
+                {
+                    <tr>
+                        <td>@theme.ThemeName</td>
+                        <td>@theme.ShortInformation</td>
+                        <td>
+                            <a asp-controller="Theme" asp-action="ThemeDetail" asp-route-projectId="@Model.Id" asp-route-themeId="@theme.Id">@Resources.details</a>
+                        </td>
+                        <td>
+                            <button id="deletebutton" class="btn btn-primary">@Resources.remove</button>
+                        </td>
+                    </tr>
+                    teller++;
+                }
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <h4>@Resources.add_subtheme</h4>
+            <form >
+                <input value="@Model.Id" id="projectId" type="hidden">
+                <div class="form-group">
+                    <label >@Resources.name</label>
+                    <input id="themeName" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label >@Resources.short_description</label>
+                    <input id="shortInfo" class="form-control"/>
+                </div>
+            </form>
+            <button class="btn btn-primary" id="toevoegenSubThema">@Resources.add_subtheme</button>
+        </div>
+    </section>
+</div>
+</div>
+</div>
+<div class="tab-pane fade" id="pills-attendants" role="tabpanel" aria-labelledby="pills-attendants-tab" tabindex="0">
+    <section>
+        <h3>@Resources.attendants</h3>
+        <div>
+            <table class="table table-striped" id="attendantsTable">
+                <thead>
+                <tr>
+                    <th>@Resources.first_name</th>
+                    <th>@Resources.last_name</th>
+                    <th>@Resources.username</th>
+                    <th>@Resources.birthday</th>
+                </tr>
+                </thead>
+                <tbody id="attendantsTableBody">
+
+                </tbody>
+            </table>
+        </div>
+        <p>@Resources.attendant_reassign</p>
+        <a asp-controller="Organization" asp-action="AttendentDetails" class="btn btn-primary">@Resources.attendant_details</a>
+    </section>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@Resources.confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="ModalBody" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resources.close</button>
+                <button type="button" id="changeProjectStatus" class="btn btn-primary" data-bs-dismiss="modal">@Resources.confirm_changes</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+﻿@using NT.BL.Domain.flowpck
+@using NT.BL.Domain.questionpck.QuestionDomPck
+@using NT.DAL.StepRep.QuestionPck
+@using NT.UI.MVC.Models.Dto
+@using NT.UI.MVC.Resources
+@model NT.BL.Domain.flowpck.Step
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+@section Scripts
+{
+    
+<script src="~/dist/updateStep.entry.js" defer></script>
+<script src="~/dist/home.entry.js" defer></script>
+<script src="~/dist/site.entry.js" defer></script>
+}
+<h1>Update step</h1>
+
+@if (Model.Content is QuestionWithOption questionWithOption)
+{
+    <div id="questionOption">@questionWithOption.Id</div>
+    <div class="row">
+        <label for="nameInput_m" class="col-sm-2 form-label">@Resources.name</label>
+        <div class="col-sm-10">
+            <input id="nameInput_m" placeholder="@Model.Name" value="@Model.Name" class="form-control" type="text">
+            <span class="text-danger" id="nameInputSpan_m"></span>
+        </div>
+    </div>
+    <div class="row">
+        <label for="vraagInput_m" class="col-sm-2 form-label">@Resources.question</label>
+        <div class="col-sm-10">
+            <input id="vraagInput_m" placeholder="@questionWithOption.QuestionText" value="@questionWithOption.QuestionText" class="form-control" type="text">
+            <span class="text-danger" id="vraagInputSpan_m"></span>
+        </div>
+    </div>
+    @*<div class="row">
+        <h2>@Resources.answers</h2>
+        <label for="antwoordInput1_m" class="col-sm-2 form-label">@Resources.answers:</label>
+        <div class="col-sm-10" id="antwoordInput_m">
+            @foreach (var answer in questionWithOption.AnswerOptions)
+            {
+                <input id="antwoordInput1_m" placeholder="@answer.TextAnswer"  value="@answer.TextAnswer" class="form-control" type="text">
+            }
+        </div>
+    </div>*@
+    <div>
+        <label for="themes_m" class="col-sm-2 form-label">@Resources.theme</label>
+
+        <select placeholder="@Model.Theme" value="@Model.Theme" id="themes_m">
+            @foreach (var theme in ViewBag.Project.Theme.Subthemes)
+            {
+                <option value="@theme.Id" class="text-light">@theme.ThemeName</option>
+            }
+        </select>
+    </div> 
+}else if (Model.Content is QuestionOpen questionOpen)
+{
+    <div id="questionOpen">@questionOpen.Id</div>
+
+    <div class="row">
+        <label for="nameInput_m" class="col-sm-2 form-label">@Resources.name</label>
+        <div class="col-sm-10">
+            <input id="nameInput_m" placeholder="@Model.Name" value="@Model.Name" class="form-control" type="text">
+            <span class="text-danger" id="nameInputSpan_m"></span>
+        </div>
+    </div>
+    <div class="row">
+        <label for="vraagInput_m" class="col-sm-2 form-label">@Resources.question</label>
+        <div class="col-sm-10">
+            <input id="vraagInput_m" placeholder="@questionOpen.QuestionText" value="@questionOpen.QuestionText" class="form-control" type="text">
+            <span class="text-danger" id="vraagInputSpan_m"></span>
+        </div>
+    </div>
+    <div>
+        <label for="themes_m" class="col-sm-2 form-label">@Resources.theme</label>
+        <select placeholder="@Model.Theme" value="@Model.Theme" id="themes_m">
+            @foreach (var theme in ViewBag.Project.Theme.Subthemes)
+            {
+                <option value="@theme.Id" class="text-light">@theme.ThemeName</option>
+            }
+        </select>
+    </div>
+}
+else if (Model.Content is InformationContent informationContent)
+{
+    <div id="information">@informationContent.Id</div>
+    <div class="row">
+        <label for="nameInput_m" class="col-sm-2 form-label">@Resources.name</label>
+        <div class="col-sm-10">
+            <input id="nameInput_m" placeholder="@Model.Name" value="@Model.Name" class="form-control" type="text">
+            <span class="text-danger" id="nameInputSpan_m"></span>
+        </div>
+    </div>
+    <div class="row">
+        <label for="title_input" class="col-sm-2 form-label">@Resources.title</label>
+        <div class="col-sm-10">
+            <input id="title_input" placeholder="@informationContent.Title" value="@informationContent.Title" class="form-control" type="text">
+            <span class="text-danger" id="vraagInputSpan_m"></span>
+        </div>
+    </div>
+    <div class="row">
+        <label for="info_input" class="col-sm-2 form-label">@Resources.info</label>
+        <div class="col-sm-10">
+            <input id="info_input" placeholder="@informationContent.TextInformation" value="@informationContent.TextInformation" class="form-control" type="text">
+            <span class="text-danger" id="vraagInputSpan_m"></span>
+        </div>
+    </div>
+    <div>
+        <label for="themes_m" class="col-sm-2 form-label">@Resources.theme</label>
+        <select placeholder="@Model.Theme" value="@Model.Theme" id="themes_m">
+            @foreach (var theme in ViewBag.Project.Theme.Subthemes)
+            {
+                <option value="@theme.Id" class="text-light">@theme.ThemeName</option>
+            }
+        </select>
+    </div>
+    <div class="row">
+        <h2>@Resources.image_video</h2>
+        <div class="col-sm-10">
+            <form id="upload-form" enctype="multipart/form-data" method="post">
+                <dl>
+                    <dt>
+                        <label for="upload-input" class="form-label">@Resources.file</label>
+                    </dt>
+                    <dd>
+                        <input id="upload-input" type="file" name="file" accept="image/*, video/*, audio/*" class="form-control"/>
+                    </dd>
+                </dl>
+            </form>
+            <span class="text-danger" id="fileInputSpan"></span>
+        </div>
+    </div>
+}
+<button type="button" class="btn btn-primary" id="updateStep2">@Resources.update</button>

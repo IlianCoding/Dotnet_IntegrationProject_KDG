@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="your_voice_matters" xml:space="preserve">
+        <value>Your voice matters</value>
+    </data>
+    <data name="home_page" xml:space="preserve">
+        <value>Home Page</value>
+    </data>
+    <data name="flows" xml:space="preserve">
+        <value>Flows</value>
+    </data>
+    <data name="start_survey" xml:space="preserve">
+        <value>Start Survey!</value>
+    </data>
+    <data name="state" xml:space="preserve">
+        <value>State</value>
+    </data>
+    <data name="flow" xml:space="preserve">
+        <value>Flow</value>
+    </data>
+    <data name="total_running" xml:space="preserve">
+        <value>Total Running</value>
+    </data>
+    <data name="make_conditional_point" xml:space="preserve">
+        <value>Make a conditional point</value>
+    </data>
+    <data name="title" xml:space="preserve">
+        <value>Title</value>
+    </data>
+    <data name="what_answeroption_cp" xml:space="preserve">
+        <value>What answeroption would you like to put the conditional point on:</value>
+    </data>
+    <data name="what_step" xml:space="preserve">
+        <value>What step does it lead to</value>
+    </data>
+    <data name="lets_go" xml:space="preserve">
+        <value>Let's go</value>
+    </data>
+    <data name="something_went_wrong" xml:space="preserve">
+        <value>Something went wrong :/</value>
+    </data>
+    <data name="fill_in_contact" xml:space="preserve">
+        <value>Fill in contact</value>
+    </data>
+    <data name="first_name" xml:space="preserve">
+        <value>First Name</value>
+    </data>
+    <data name="last_name" xml:space="preserve">
+        <value>Last Name</value>
+    </data>
+    <data name="email_adress" xml:space="preserve">
+        <value>E-mail</value>
+    </data>
+    <data name="phone_number" xml:space="preserve">
+        <value>Phone number: +32</value>
+    </data>
+    <data name="further_info" xml:space="preserve">
+        <value>Do you want to receive further information?</value>
+    </data>
+    <data name="submit_personal" xml:space="preserve">
+        <value>Submit personal details</value>
+    </data>
+    <data name="name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="flow_enable" xml:space="preserve">
+        <value>Flow Enabled</value>
+    </data>
+    <data name="lineair_flow" xml:space="preserve">
+        <value>Linear flow </value>
+    </data>
+    <data name="create_flow" xml:space="preserve">
+        <value>Create a flow</value>
+    </data>
+    <data name="flow_details" xml:space="preserve">
+        <value>Flow details</value>
+    </data>
+    <data name="mode" xml:space="preserve">
+        <value>Mode</value>
+    </data>
+    <data name="kiosk_mode" xml:space="preserve">
+        <value>Kiosk mode </value>
+    </data>
+    <data name="normal_mode" xml:space="preserve">
+        <value>AI mode</value>
+    </data>
+    <data name="run" xml:space="preserve">
+        <value>Run</value>
+    </data>
+    <data name="detail" xml:space="preserve">
+        <value>Detail</value>
+    </data>
+    <data name="start_time" xml:space="preserve">
+        <value>StartTime</value>
+    </data>
+    <data name="running" xml:space="preserve">
+        <value>Running</value>
+    </data>
+    <data name="pauzed" xml:space="preserve">
+        <value>Pauzed</value>
+    </data>
+    <data name="close" xml:space="preserve">
+        <value>Close</value>
+    </data>
+    <data name="show_hide_table" xml:space="preserve">
+        <value>Show/Hide table</value>
+    </data>
+    <data name="details" xml:space="preserve">
+        <value>Details</value>
+    </data>
+    <data name="steps" xml:space="preserve">
+        <value>Steps</value>
+    </data>
+    <data name="conditionele_steps" xml:space="preserve">
+        <value>Conditional steps</value>
+    </data>
+    <data name="required" xml:space="preserve">
+        <value>* Required</value>
+    </data>
+    <data name="flow_type" xml:space="preserve">
+        <value>Flow type</value>
+    </data>
+    <data name="project_name" xml:space="preserve">
+        <value>Project name</value>
+    </data>
+    <data name="active" xml:space="preserve">
+        <value>Active</value>
+    </data>
+    <data name="inactive" xml:space="preserve">
+        <value>Inactive</value>
+    </data>
+    <data name="pauze" xml:space="preserve">
+        <value>Pauze   </value>
+    </data>
+    <data name="linear" xml:space="preserve">
+        <value>Linear</value>
+    </data>
+    <data name="circular" xml:space="preserve">
+        <value>Circular</value>
+    </data>
+    <data name="confirm_changes" xml:space="preserve">
+        <value>Confirm</value>
+    </data>
+    <data name="change_state" xml:space="preserve">
+        <value>Change state</value>
+    </data>
+    <data name="edit" xml:space="preserve">
+        <value>Edit</value>
+    </data>
+    <data name="delete_flow" xml:space="preserve">
+        <value>Delete flow</value>
+    </data>
+    <data name="theme" xml:space="preserve">
+        <value>Theme</value>
+    </data>
+    <data name="content_type" xml:space="preserve">
+        <value>Content type</value>
+    </data>
+    <data name="normal_steps" xml:space="preserve">
+        <value>Normal steps</value>
+    </data>
+    <data name="add_conditional" xml:space="preserve">
+        <value>Add conditional point</value>
+    </data>
+    <data name="info" xml:space="preserve">
+        <value>Information</value>
+    </data>
+    <data name="delete_step" xml:space="preserve">
+        <value>Delete step</value>
+    </data>
+    <data name="deactivate_step" xml:space="preserve">
+        <value>Deactivate step</value>
+    </data>
+    <data name="activate_step" xml:space="preserve">
+        <value>Activate step</value>
+    </data>
+    <data name="add_step" xml:space="preserve">
+        <value>Add a new step</value>
+    </data>
+    <data name="adding_platform" xml:space="preserve">
+        <value>Adding a new platform</value>
+    </data>
+    <data name="add" xml:space="preserve">
+        <value>Add</value>
+    </data>
+    <data name="organization_name" xml:space="preserve">
+        <value>Organisation name</value>
+    </data>
+    <data name="owned_projects" xml:space="preserve">
+        <value>Owned projects</value>
+    </data>
+    <data name="birthday" xml:space="preserve">
+        <value>Birthday</value>
+    </data>
+    <data name="add_platform" xml:space="preserve">
+        <value>Add a new platform</value>
+    </data>
+    <data name="maintainer" xml:space="preserve">
+        <value>Attendant</value>
+    </data>
+    <data name="creation_date" xml:space="preserve">
+        <value>Creation date</value>
+    </data>
+    <data name="number_project" xml:space="preserve">
+        <value>Number of assigned projects</value>
+    </data>
+    <data name="unlock_insights" xml:space="preserve">
+        <value>Unlock insights, ignite growth! Dive into our survey app today and let your voice be heard. 🚀 #SurveySuccess</value>
+    </data>
+    <data name="submit" xml:space="preserve">
+        <value>Submit</value>
+    </data>
+    <data name="add_organisation" xml:space="preserve">
+        <value>Add a new organisation</value>
+    </data>
+    <data name="add_organisation_member" xml:space="preserve">
+        <value>Add a new organisation member</value>
+    </data>
+    <data name="submit_organisation" xml:space="preserve">
+        <value>Submit organisation member details</value>
+    </data>
+    <data name="enter_credentials" xml:space="preserve">
+        <value>Enter credentials</value>
+    </data>
+    <data name="add_attendant" xml:space="preserve">
+        <value>Add a new attendent</value>
+    </data>
+    <data name="submit_attendant" xml:space="preserve">
+        <value>Submit attendant details</value>
+    </data>
+    <data name="assign_project" xml:space="preserve">
+        <value>Assign a project</value>
+    </data>
+    <data name="attendant_details" xml:space="preserve">
+        <value>Attendant details</value>
+    </data>
+    <data name="all_employees" xml:space="preserve">
+        <value>All employees</value>
+    </data>
+    <data name="reassign" xml:space="preserve">
+        <value>Reassign</value>
+    </data>
+    <data name="assigned_project" xml:space="preserve">
+        <value>Assigned project</value>
+    </data>
+    <data name="all_projects" xml:space="preserve">
+        <value>All projects</value>
+    </data>
+    <data name="add_project" xml:space="preserve">
+        <value>Add a new project</value>
+    </data>
+    <data name="head_theme_description" xml:space="preserve">
+        <value>Main theme description</value>
+    </data>
+    <data name="head_theme_name" xml:space="preserve">
+        <value>Main theme name</value>
+    </data>
+    <data name="project_info" xml:space="preserve">
+        <value>Project information</value>
+    </data>
+    <data name="add_subtheme" xml:space="preserve">
+        <value>Add subtheme</value>
+    </data>
+    <data name="delete_subtheme" xml:space="preserve">
+        <value>Delete subtheme</value>
+    </data>
+    <data name="update_subtheme" xml:space="preserve">
+        <value>Update subtheme</value>
+    </data>
+    <data name="subthemes" xml:space="preserve">
+        <value>Subthemes</value>
+    </data>
+    <data name="no_info_available" xml:space="preserve">
+        <value>No information available</value>
+    </data>
+    <data name="head_theme" xml:space="preserve">
+        <value>Main theme</value>
+    </data>
+    <data name="update_head_theme" xml:space="preserve">
+        <value>Update main theme</value>
+    </data>
+    <data name="add_flow" xml:space="preserve">
+        <value>Add a new flow</value>
+    </data>
+    <data name="short_description" xml:space="preserve">
+        <value>Short description</value>
+    </data>
+    <data name="attendant_name" xml:space="preserve">
+        <value>Attendant name</value>
+    </data>
+    <data name="choose_runningflow" xml:space="preserve">
+        <value>Choose wich one do you want to have on this screen</value>
+    </data>
+    <data name="survey" xml:space="preserve">
+        <value>Survey</value>
+    </data>
+    <data name="your_account" xml:space="preserve">
+        <value>Your account</value>
+    </data>
+    <data name="choice_language" xml:space="preserve">
+        <value>Choose your language</value>
+    </data>
+    <data name="hello" xml:space="preserve">
+        <value>Hello</value>
+    </data>
+    <data name="register" xml:space="preserve">
+        <value>Register</value>
+    </data>
+    <data name="error_accured" xml:space="preserve">
+        <value>An error has occured prossesing your request</value>
+    </data>
+    <data name="development_mode" xml:space="preserve">
+        <value>Development Mode</value>
+    </data>
+    <data name="development" xml:space="preserve">
+        <value>Development</value>
+    </data>
+    <data name="swapping_to" xml:space="preserve">
+        <value>Swapping to</value>
+    </data>
+    <data name="environment" xml:space="preserve">
+        <value>environment will display more detailed information about the error that occurred</value>
+    </data>
+    <data name="development_environment" xml:space="preserve">
+        <value>The Development environment shouldn't be enabled for deployed applications</value>
+    </data>
+    <data name="sensitive_info" xml:space="preserve">
+        <value>It can result in displaying sensitive information from exceptions to end users.
+    For local debugging, enable the</value>
+    </data>
+    <data name="setting" xml:space="preserve">
+        <value>environment by setting the</value>
+    </data>
+    <data name="environment_variable" xml:space="preserve">
+        <value>environment variable to</value>
+    </data>
+    <data name="restart" xml:space="preserve">
+        <value>and restarting the app</value>
+    </data>
+    <data name="themes_of" xml:space="preserve">
+        <value>Themes of</value>
+    </data>
+    <data name="comment" xml:space="preserve">
+        <value>Comment</value>
+    </data>
+    <data name="theme_name" xml:space="preserve">
+        <value>Theme name</value>
+    </data>
+    <data name="theme_info" xml:space="preserve">
+        <value>Theme information</value>
+    </data>
+    <data name="back_to_selection" xml:space="preserve">
+        <value>Back to theme selection</value>
+    </data>
+    <data name="leave_comment" xml:space="preserve">
+        <value>Leave a comment</value>
+    </data>
+    <data name="appreciate" xml:space="preserve">
+        <value>We greatly appreciate your participation.
+  Thank you again!</value>
+    </data>
+    <data name="thank_you_participate" xml:space="preserve">
+        <value>Thank You for Participating in Phygital Tool!</value>
+    </data>
+    <data name="participate" xml:space="preserve">
+        <value>Would you like to leave your details so we can provide you with more information about other events?</value>
+    </data>
+    <data name="more_info" xml:space="preserve">
+        <value>Get more information about other events!</value>
+    </data>
+    <data name="make_1_choice" xml:space="preserve">
+        <value>Make 1 choice</value>
+    </data>
+    <data name="make_multiple_choice" xml:space="preserve">
+        <value>Make 1 or more choices</value>
+    </data>
+    <data name="multiple_choice" xml:space="preserve">
+        <value>Multiple choice</value>
+    </data>
+    <data name="single_choice" xml:space="preserve">
+        <value>Single choice</value>
+    </data>
+    <data name="range_choice" xml:space="preserve">
+        <value>Range question</value>
+    </data>
+    <data name="open_question" xml:space="preserve">
+        <value>Open question</value>
+    </data>
+    <data name="create_step" xml:space="preserve">
+        <value>Create a new step</value>
+    </data>
+    <data name="give_name_step" xml:space="preserve">
+        <value>Give the step a name</value>
+    </data>
+    <data name="what_question" xml:space="preserve">
+        <value>What question would you like to ask</value>
+    </data>
+    <data name="what_answeroption" xml:space="preserve">
+        <value>What are the answeroptions</value>
+    </data>
+    <data name="give_theme" xml:space="preserve">
+        <value>Give it a theme</value>
+    </data>
+    <data name="question" xml:space="preserve">
+        <value>Question</value>
+    </data>
+    <data name="answers" xml:space="preserve">
+        <value>Answers</value>
+    </data>
+    <data name="what_title" xml:space="preserve">
+        <value>What is the title</value>
+    </data>
+    <data name="what_info" xml:space="preserve">
+        <value>What info would you like to share</value>
+    </data>
+    <data name="file" xml:space="preserve">
+        <value>File</value>
+    </data>
+    <data name="image_video" xml:space="preserve">
+        <value>Image, Video or Audio</value>
+    </data>
+    <data name="conditional_points" xml:space="preserve">
+        <value>Conditional point</value>
+    </data>
+    <data name="step" xml:space="preserve">
+        <value>Step</value>
+    </data>
+    <data name="answeroption" xml:space="preserve">
+        <value>Answeroption</value>
+    </data>
+    <data name="change_cp" xml:space="preserve">
+        <value>Update conditional point </value>
+    </data>
+    <data name="delete_cp" xml:space="preserve">
+        <value>Delete conditional point</value>
+    </data>
+    <data name="question_type" xml:space="preserve">
+        <value>Question type</value>
+    </data>
+    <data name="info_project" xml:space="preserve">
+        <value>Information about this project</value>
+    </data>
+    <data name="text" xml:space="preserve">
+        <value>Text</value>
+    </data>
+    <data name="closed" xml:space="preserve">
+        <value>Closed</value>
+    </data>
+    <data name="add_notes" xml:space="preserve">
+        <value>Add note</value>
+    </data>
+    <data name="notes" xml:space="preserve">
+        <value>Notes</value>
+    </data>
+    <data name="stay_updated_q" xml:space="preserve">
+        <value>If u wanna stay updated you can leave your information here.</value>
+    </data>
+    <data name="stay_updated_a" xml:space="preserve">
+        <value>I wanna stay updated</value>
+    </data>
+    <data name="fill_info_q" xml:space="preserve">
+        <value>If you filled in your information before you can give us your email</value>
+    </data>
+    <data name="fill_info_a" xml:space="preserve">
+        <value>I've already given my information</value>
+    </data>
+    <data name="no_update" xml:space="preserve">
+        <value>I don't want to stay updated</value>
+    </data>
+    <data name="remove" xml:space="preserve">
+        <value>Delete</value>
+    </data>
+    <data name="step_name" xml:space="preserve">
+        <value>Step name</value>
+    </data>
+    <data name="created_by" xml:space="preserve">
+        <value>Created by</value>
+    </data>
+    <data name="thank_you" xml:space="preserve">
+        <value>Thank you!</value>
+    </data>
+    <data name="go_back" xml:space="preserve">
+        <value>Turn back to the main screen</value>
+    </data>
+    <data name="answer_mobile" xml:space="preserve">
+        <value>Answer on Mobile</value>
+    </data>
+    <data name="press_f" xml:space="preserve">
+        <value>Press Button F to start survey</value>
+    </data>
+    <data name="buttons_infront" xml:space="preserve">
+        <value>The buttons in front of you will help you answer the question.</value>
+    </data>
+    <data name="color" xml:space="preserve">
+        <value>Colour</value>
+    </data>
+    <data name="select_colour" xml:space="preserve">
+        <value>Select your colour</value>
+    </data>
+    <data name="primary_colour" xml:space="preserve">
+        <value>Primary colour</value>
+    </data>
+    <data name="font" xml:space="preserve">
+        <value>Font</value>
+    </data>
+    <data name="update" xml:space="preserve">
+        <value>Update</value>
+    </data>
+    <data name="modal_title" xml:space="preserve">
+        <value>Modal title</value>
+    </data>
+    <data name="flow_name" xml:space="preserve">
+        <value>Flow name</value>
+    </data>
+    <data name="flow_cannot_open" xml:space="preserve">
+        <value>The flow cannot be opened because the project is inactive.</value>
+    </data>
+    <data name="flow_closed" xml:space="preserve">
+        <value>If the flow is closed, the attendant cannot start the flow.</value>
+    </data>
+    <data name="project_inactive" xml:space="preserve">
+        <value>This project is currently inactive. As a result, all flows will be closed, and attendants will be unable to initiate new flows.</value>
+    </data>
+    <data name="theme_details" xml:space="preserve">
+        <value>Theme details</value>
+    </data>
+    <data name="confirmation" xml:space="preserve">
+        <value>Confirmation</value>
+    </data>
+    <data name="username" xml:space="preserve">
+        <value>Username</value>
+    </data>
+    <data name="attendants" xml:space="preserve">
+        <value>Attendants</value>
+    </data>
+    <data name="project_details" xml:space="preserve">
+        <value>Project details</value>
+    </data>
+    <data name="end_session" xml:space="preserve">
+        <value>End session</value>
+    </data>
+    <data name="attendant_reassign" xml:space="preserve">
+        <value>Go to attendant details to reassign to project</value>
+    </data>
+    <data name="terug_project" xml:space="preserve">
+        <value>Back to project</value>
+    </data>
+    <data name="terug_flow" xml:space="preserve">
+        <value>Back to flow</value>
+    </data>
+    <data name="warning_cs" xml:space="preserve">
+        <value>You don't have a conditional step yet or all your conditional steps have been assigned. Please make a new one before adding a conditional point.</value>
+    </data>
+    <data name="note_warning_subtheme" xml:space="preserve">
+        <value>You currently do not have any Theme. Please create one before proceeding.</value>
+    </data>
+    <data name="closed_project" xml:space="preserve">
+        <value>The project is currently closed. Please contact your organization to initiate this process.</value>
+    </data>
+    <data name="no_assigned_flow" xml:space="preserve">
+        <value>You currently have no assigned flows.
+        Please contact your organization for further assistance.</value>
+    </data>
+    <data name="closed_flow" xml:space="preserve">
+        <value>The flow is currently closed. Please contact your organization to initiate this process.</value>
+    </data>
+    <data name="no_step" xml:space="preserve">
+        <value>The flow doesn't have any steps. Please contact your organization to initiate this process.</value>
+    </data>
+    <data name="no_note" xml:space="preserve">
+        <value>You don't have any note. Please make one.</value>
+    </data>
+    <data name="required_birthday" xml:space="preserve">
+        <value>* Older than 16 years old</value>
+    </data>
+    <data name="test_flow" xml:space="preserve">
+        <value>Test Survey</value>
+    </data>
+    <data name="add_conditional_step" xml:space="preserve">
+        <value>Add conditional step</value>
+    </data>
+    <data name="project" xml:space="preserve">
+        <value>Project</value>
+    </data>
+    <data name="description" xml:space="preserve">
+        <value>Description</value>
+    </data>
+    <data name="password" xml:space="preserve">
+        <value>Password</value>
+    </data>
+    <data name="least_characters" xml:space="preserve">
+        <value>At least 6 characters</value>
+    </data>
+    <data name="uppcase_letter" xml:space="preserve">
+        <value>Contains an uppercase letter</value>
+    </data>
+    <data name="special_character" xml:space="preserve">
+        <value>Contains a special character (#)</value>
+    </data>
+    <data name="select_color" xml:space="preserve">
+        <value>Select your colour</value>
+    </data>
+    <data name="press_button" xml:space="preserve">
+        <value>Press the green button to start your survey!</value>
+    </data>
+</root>

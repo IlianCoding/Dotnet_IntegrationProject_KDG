@@ -1,0 +1,99 @@
+@using NT.UI.MVC.Resources
+@using NT.BL.Domain.users
+@model NT.UI.MVC.Models.UserViewModels.NewUserViewModel
+
+@{
+    ViewBag.Title = "Filling in contact";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/site.css" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/passwordStrength.entry.js" defer></script>
+    <script src="~/dist/addingPlatformValidation.entry.js" defer></script>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/dist/passwordStrengthStyling.css" rel="stylesheet">
+    <title>@Resources.fill_in_contact</title>
+</head>
+<body>
+<h2>@Resources.fill_in_contact</h2>
+
+<form id="myForm" asp-controller="EndUser" asp-action="FillInContact" method="post" asp-route-runningFlowId="@ViewBag.RunningFlow.Id">
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" asp-for="FirstName">@Resources.first_name</label>
+        <div class="col-sm-10">
+            <span class="required-label d-block">@Resources.required</span>
+            <input class="form-control" asp-for="FirstName">
+        </div>
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" asp-for="LastName">@Resources.last_name</label>
+        <div class="col-sm-10">
+            <span class="required-label d-block">@Resources.required</span>
+            <input class="form-control" asp-for="LastName">
+        </div>
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" asp-for="Email">@Resources.email_adress</label>
+        <div class="col-sm-10">
+            <span class="required-label d-block">@Resources.required</span>
+            <input class="form-control" asp-for="Email">
+        </div>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" asp-for="PhoneNumber">@Resources.phone_number</label>
+        <div class="col-sm-10">
+            <input class="form-control" asp-for="PhoneNumber">
+        </div>
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" asp-for="Birthday"></label>
+        <div class="col-sm-10">
+            <span class="required-label d-block">@Resources.required_birthday</span>
+            <input class="form-control" asp-for="Birthday" type="date" id="Birthday"/>
+        </div>
+        <span class="text-danger d-block" id="birthday-error"></span>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 form-label" asp-for="Password">@Resources.password</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" asp-for="Password" id="password">
+            <div id="password-strength" class="password-strength"></div>
+            <ul id="password-requirements" class="password-requirements">
+                <li id="length-requirement">@Resources.least_characters</li>
+                <li id="uppercase-requirement">@Resources.uppcase_letter</li>
+                <li id="special-requirement">@Resources.special_character</li>
+            </ul>
+        </div>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-floating mb-3">
+        <select id="colorSelect" name="Color" class="form-select">
+            <option value="">@Resources.select_color</option>
+            @foreach (Color color in Enum.GetValues(typeof(Color)))
+            {
+                <option value="@((int)color)">@color</option>
+            }
+        </select>
+        <label for="colorSelect" class="form-label">@Resources.color</label>
+    </div>
+    <div class="mb-3">
+        <input asp-for="MoreInfo" type="checkbox" id="myCheckbox" name="myCheckbox" value="false">
+        <label asp-for="MoreInfo" for="myCheckbox">@Resources.further_info</label>
+        </div>
+        <button type="submit" class="btn btn-primary">@Resources.submit_personal</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,56 @@
+@model NT.BL.Domain.flowpck.RunningFlow
+@using NT.UI.MVC.Resources
+
+@{
+    ViewBag.Title = "SurveyHome";
+    Layout = "_Layout";
+}
+
+@if (Model.IsKiosk)
+{
+@section Scripts
+{
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/SurvayHome.entry.js" defer></script>
+}
+@* <!DOCTYPE html> *@
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Survey home</title>
+    </head>
+    <body>
+    <div class="justify-content-center">
+        <a asp-controller="Step" asp-action="FirstStep" asp-route-runningFlowId="@ViewBag.RunningFlow.Id" asp-route-flowId="@ViewBag.Flow.Id" class="btn btn-primary">@Resources.start_survey</a>
+    </div>
+    </body>
+    </html>
+}
+else
+{
+@section Scripts
+{
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/SurvayHome.entry.js" defer></script>
+    <script src="~/dist/videoInputSurveyHome.entry.js" defer></script>
+}
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Survey home</title>
+    </head>
+    <body>
+    <video id="video" width="640" height="480" autoplay muted></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <div class="justify-content-center">
+        <h2>@Resources.press_button</h2>
+        <p>@Resources.buttons_infront</p>
+        <input type="hidden" id="surveyStartIndicator" value="surveyStart">
+    </div>
+    </body>
+    </html>
+}

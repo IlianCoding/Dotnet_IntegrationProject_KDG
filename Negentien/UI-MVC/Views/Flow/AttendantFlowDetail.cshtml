@@ -1,0 +1,271 @@
+@using Humanizer.Localisation
+@using Microsoft.DotNet.Scaffolding.Shared.ProjectModel
+@using NT.BL.Domain.flowpck
+@using NT.BL.Domain.questionpck.QuestionDomPck
+@using NT.BL.Domain.users
+@using NT.UI.MVC.Resources
+@using Resources = NT.UI.MVC.Resources.Resources
+@model NT.UI.MVC.Models.UserViewModels.AttendantFlowDetailViewModel
+
+@{
+    ViewBag.Title = "FlowDetailPage for attendant";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/AttendantFlowDetail.entry.js" defer></script>
+    <script src="~/dist/AddRunningFlowInDetailPage.entry.js" defer></script>
+    <script src="~/dist/AttendantFlowLayout.entry.js" defer></script>
+    <script src="~/dist/AddNote.entry.js" defer></script>
+}
+
+@{
+    var indexRunningFlow = 1;
+    var indexStoppedFlow = 1;
+    var indexNote = 1;
+    var countStep = 0;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header text-center">
+                <h1 class="mb-0">@Model.Flow.FlowName</h1>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-sm-2 text-end fw-bold">
+                        <label class="col-form-label">@Resources.state</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <p class="form-control-plaintext border rounded p-2 mb-0">@Model.Flow.State</p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-2 text-end fw-bold">
+                        <label class="col-form-label">@Resources.flow</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <p class="form-control-plaintext border rounded p-2 mb-0">@(Model.Flow.IsLinear ? "Linear" : "Circular")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (!Model.Project.IsActive)
+{
+    <div class="alert alert-danger border border-danger">
+        @Resources.closed_project
+    </div>
+} else if (Model.Flow.State == State.Closed)
+{
+    <div class="alert alert-danger border border-danger">
+        @Resources.closed_flow
+    </div>
+} else if (Model.StepsCount == 0)
+{
+    <div class="alert alert-danger border border-danger">
+        @Resources.no_step
+    </div>
+}
+else
+{
+    <div class="container mt-5">
+        <form class="border p-4 rounded">
+            <div class="form-group row align-items-center">
+                <label class="col-sm-2 col-form-label">@Resources.mode</label>
+                <div class="col-sm-6">
+                    <div class="form-check form-check-inline">
+                        <input name="isKiosk" id="radioTrueKiosk" class="form-check-input" type="radio" value="true" checked>
+                        <label for="radioTrueKiosk" class="form-check-label">@Resources.kiosk_mode</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input name="isKiosk" id="radioFalseKiosk" class="form-check-input" type="radio" value="false">
+                        <label for="radioFalseKiosk" class="form-check-label">@Resources.normal_mode</label>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-right">
+                    <button id="startFlowButton" type="button" class="btn btn-primary">@Resources.run</button>
+                </div>
+            </div>
+            <input id="attendName" value="@if (User.Identity != null) {@User.Identity.Name }" type="hidden"/>
+            <input id="flowIdAttendantDetailPage" value="@Model.Flow.Id" type="hidden"/>
+        </form>
+    </div>
+}
+@* iskiosk-Mode toepassen in de CurrentFlow *@
+<br>
+<br>
+<ul class="nav nav-pills mb-3 flex-wrap justify-content-center  d-md-flex" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-runningflows-tab" data-bs-toggle="pill" data-bs-target="#pills-runningflows" type="button" role="tab" aria-controls="pills-runningflows" aria-selected="true">@Resources.running</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-closed-tab" data-bs-toggle="pill" data-bs-target="#pills-closedflows" type="button" role="tab" aria-controls="pills-closedflows" aria-selected="false">@Resources.closed</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-add-noted-tab" data-bs-toggle="pill" data-bs-target="#pills-add-noted" type="button" role="tab" aria-controls="pills-add-noted" aria-selected="false">@Resources.add_notes</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-noted-tab" data-bs-toggle="pill" data-bs-target="#pills-noted" type="button" role="tab" aria-controls="pills-noted" aria-selected="false">@Resources.notes</button>
+    </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-runningflows" role="tabpanel" aria-labelledby="pills-runningflows-tab" tabindex="0">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th></th>
+                <th>@Resources.start_time</th>
+                <th>@Resources.mode</th>
+                <th>@Resources.state</th>
+                <th>@Resources.detail</th>
+            </tr>
+            </thead>
+            <tbody id="attendantFlowDetailTBody">
+            @foreach (RunningFlow runningFlow in Model.Flow.RunningFlows)
+            {
+                if (@runningFlow.State != State.Closed && User.Identity != null && (User.Identity.Name == runningFlow.CreatedAttendantName ||
+                                                                                    User.IsInRole(CustomIdentityConstants.Organization) ||
+                                                                                    User.IsInRole(CustomIdentityConstants.HeadOfPlatform))
+                    )
+                {
+                    <tr class="runningFlow">
+                        <td>@indexRunningFlow</td>
+                        <td>@runningFlow.RunningFlowTime</td>
+                        <td>@(runningFlow.IsKiosk ? "Kiosk mode" : "Ai mode")</td>
+                        <input id="runningTime" value="@runningFlow.RunningFlowTime" type="hidden"/>
+                        <input id="runningState" value="@runningFlow.State" type="hidden"/>
+                        <input id="runningId" value="@runningFlow.Id" type="hidden"/>
+                        <td>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-primary flex-grow-1 mr-1" id="setPauzeRunningflow">@Resources.running</button>
+                                <button class="btn btn-primary flex-grow-1 ml-1" id="setStartRunningflow">@Resources.pauzed</button>
+                            </div>
+                        </td>
+                        <td>
+                            @* TODO: toggle toevoegen *@
+                            @* TODO: Na het stoppen van de runningFlow --> runningflow verwijderen? nodig voor opslagen van vragen? nodig voor survay? *@
+                            <button class="btn btn-primary" id="stopButton">@Resources.close</button>
+                        </td>
+                    </tr>
+                    indexRunningFlow++;
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="pills-closedflows" role="tabpanel" aria-labelledby="pills-closed-tab" tabindex="0">
+        <section>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>@Resources.start_time</th>
+                    <th>@Resources.state</th>
+                    <th>@Resources.detail</th>
+                </tr>
+                </thead>
+                <tbody id="closedRunningFlowTbody">
+                @foreach (var runningFlow in Model.ClosedRunningFlows)
+                {
+                    <tr>
+                        <td>@indexStoppedFlow</td>
+                        <td>@runningFlow.RunningFlowTime</td>
+                        <td>@runningFlow.State</td>
+                        <td></td>
+                    </tr>
+                    indexStoppedFlow++;
+                }
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <div class="tab-pane fade" id="pills-add-noted" role="tabpanel" aria-labelledby="pills-add-noted-tab" tabindex="0">
+        <section>
+            <form>
+                <input type="hidden" id="attendantNameInput" value="@User.Identity?.Name"/>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 form-label" for="noteStepSelect">@Resources.step</label>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label for="noteStepSelect">Select a step:</label>
+                            <select id="noteStepSelect" class="form-control">
+                                @{
+                                    int indexStep = 1; // Declaratie buiten de loop plaatsen
+
+                                    foreach (var step in Model.Steps)
+                                    {
+                                        if (step.Content is Question)
+                                        {
+                                            var openquestion = (Question)step.Content;
+                                            <option value="@step.Id" data-toggle="tooltip" title="@openquestion.QuestionText">
+                                                <a class="col-sm-10">
+                                                    @indexStep - @openquestion.QuestionText
+                                                </a>
+                                            </option>
+                                            indexStep++;
+                                        }
+                                    }
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-2 form-label" for="noteTitleInput">@Resources.title</label>
+                    <div class="col-sm-10">
+                        <span class="required-label">@Resources.required</span>
+                        <input type="text" class="form-control" id="noteTitleInput" placeholder="Enter title">
+                    </div>
+                    <span class="text-danger" id="noteTitleSpan"></span>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 form-label" for="noteTextInput">@Resources.text</label>
+                    <div class="col-sm-10">
+                        <span class="required-label">@Resources.required</span>
+                        <textarea class="form-control" id="noteTextInput" placeholder="Enter text" rows="8"></textarea>
+                    </div>
+                    <span class="text-danger" id="noteTextSpan"></span>
+                </div>
+                <button type="button" class="btn btn-primary" id="addNoteButton">@Resources.add_notes</button>
+            </form>
+        </section>
+    </div>
+    <div class="tab-pane fade" id="pills-noted" role="tabpanel" aria-labelledby="pills-noted-tab" tabindex="0">
+        <section>
+            <div class="container" id="noteDiv">
+                @foreach (var note in Model.Notes)
+                {
+                    var toggleId = $"note-{indexNote}";
+                    <section class="noteSection">
+                        <input type="checkbox" id="@toggleId" class="note-toggle">
+                        <label for="@toggleId" class="note-title">@note.NoteTitle</label>
+                        <section class="note-text">
+                            <p>@note.NoteText</p>
+                            <a asp-controller="Note" asp-action="NoteDetail" asp-route-noteId="@note.Id" class="text-muted">@Resources.edit</a>
+                        </section>
+
+                    </section>
+                    indexNote++;
+                }
+                @if (indexNote == 1)
+                {
+                    <div id="noteWarning" class="alert alert-warning border border-warning">
+                        @Resources.no_note
+                    </div>
+                }
+            </div>
+        </section>
+    </div>
+</div>
+<br>
+<br>
+<br>

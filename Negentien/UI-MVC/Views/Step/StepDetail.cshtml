@@ -1,0 +1,136 @@
+@using NT.BL.Domain.flowpck
+@using NT.BL.Domain.questionpck.QuestionDomPck
+@using NT.UI.MVC.Resources
+@model NT.BL.Domain.flowpck.Step
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+<script src="~/dist/site.entry.js" defer></script>
+<script src="~/dist/home.entry.js" defer></script>
+<script src="~/dist/detailStep.entry.js" defer></script>
+
+}
+<style>
+    #disabled-link {
+        pointer-events: none;
+        color: gray;
+        cursor: default;
+        text-decoration: none;
+    }
+</style>
+<a class="btn btn-outline-primary btn-return col-sm-2" asp-controller="Flow" asp-action="FlowDetail" asp-route-id="@ViewBag.Flow.Id">@Resources.terug_flow</a>
+<h1>@Model.Name</h1>
+
+   <div id="detailDiv">
+        <h2>@Resources.details</h2>
+        <div class="row mb-1">
+            <span class="col-sm-2 form-label fw-bold">@Resources.name</span>
+            <span class="col-sm-10" id="name">@Model.Name</span>
+        </div>
+        <div class="row mb-1">
+            <span class="col-sm-2 form-label fw-bold">@Resources.theme</span>
+            <span class="col-sm-10" id="theme">@Model.Theme.ThemeName</span>
+        </div>
+        <div class="row mb-1">
+            <span class="col-sm-2 form-label fw-bold">@Resources.state</span>
+            <span class="col-sm-10" id="theme">@Model.StepState</span>
+        </div>
+    </div>
+    @if(Model.Content is QuestionWithOption questionWithOption){
+        <div id="answeroptions">
+            <div class="row mb-1">
+                <span class="col-sm-2 form-label fw-bold">@Resources.question_type</span>
+                <span class="col-sm-10" id="theme">@questionWithOption.QuestionType</span>
+            </div>
+            <div class="row mb-1">
+                <span class="col-sm-2 form-label fw-bold">@Resources.question</span>
+                <span class="col-sm-10" id="theme">@questionWithOption.QuestionText</span>
+            </div>
+            <span class="col-sm-2 form-label fw-bold">@Resources.answers</span>
+
+            @foreach (var answer in questionWithOption.AnswerOptions)
+            {
+                <div class="row mb-1">
+                    <span class="col-sm-2" id="empty"></span>
+                    <span class="col-sm-10" id="name">@answer.TextAnswer</span>
+                </div>
+            }
+            <div>
+                <a class="btn btn-primary" type="button" asp-controller="Step" asp-action="UpdatePage" asp-route-stepId="@Model.Id">@Resources.edit</a>
+             <br/>
+                <br/>
+                <h2>@Resources.conditional_points</h2>
+                @foreach (var answer in questionWithOption.AnswerOptions)
+                {
+                    if (answer.ConditionalPoint != null)
+                    {
+                        <div class="row mb-1">
+                            <span class="col-sm-2 form-label fw-bold">@Resources.answeroption</span>
+                            <span class="col-sm-10" id="theme">@answer.TextAnswer</span>
+                        </div>
+                        <div class="row mb-1">
+                            <span class="col-sm-2 form-label fw-bold">@Resources.name</span>
+                            <span class="col-sm-10" id="theme">@answer.ConditionalPoint.ConditionalPointName</span>
+                        </div>
+                        <div class="row mb-1">
+                            <span class="col-sm-2 form-label fw-bold">@Resources.step</span>
+                            <span class="col-sm-10" id="theme">@answer.ConditionalPoint.ConditionalStep.Name</span>
+                        </div>
+                        <a class="btn btn-primary mb-5" asp-controller="ConditionalPoint" asp-action="UpdateConditionalPoint" asp-route-stepId="@Model.Id" asp-route-cpId="@answer.ConditionalPoint.Id" id="@answer.ConditionalPoint.Id">@Resources.change_cp</a>
+                        <button id="delete-cp" class="btn btn-primary mb-5" type="button" cp-id="@(answer.ConditionalPoint.Id)">@Resources.delete_cp</button>
+                        <br/>
+                    }
+                }
+                @if (ViewBag.CS)
+                {
+                <div id="noteWarning" class="alert alert-warning border border-warning">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p>@Resources.warning_cs</p>
+                        </div>
+                    </div>
+                </div>                    
+                <a  class="btn btn-primary" id="disabled-link" asp-controller="ConditionalPoint" asp-action="AddConditionalPoint" asp-route-stepId="@Model.Id">@Resources.add_conditional</a>
+                <a  class="btn btn-primary " asp-controller="Step" asp-action="AddConditionalStep" asp-route-flowId="@ViewBag.Flow.Id">@Resources.add_conditional_step</a>
+                    
+                }
+                else
+                {
+                    <a class="btn btn-primary" asp-controller="ConditionalPoint" asp-action="AddConditionalPoint" asp-route-stepId="@Model.Id">@Resources.add_conditional</a>
+                    <a  class="btn btn-primary " asp-controller="Step" asp-action="AddConditionalStep" asp-route-flowId="@ViewBag.Flow.Id">@Resources.add_conditional_step</a>
+                }
+                
+            </div>
+        </div>
+
+    }else if (Model.Content is QuestionOpen questionOpen)
+    {
+        <div class="row mb-1">
+            <span class="col-sm-2 form-label fw-bold">@Resources.question_type</span>
+            <span class="col-sm-10" id="theme">@questionOpen.QuestionType.</span>
+        </div>
+        <div class="row mb-1">
+            <span class="col-sm-2 form-label fw-bold">@Resources.question</span>
+            <span class="col-sm-10" id="theme">@questionOpen.QuestionText</span>
+        </div>
+<a class="btn btn-primary" type="button" asp-controller="Step" asp-action="UpdatePage" asp-route-stepId="@Model.Id">@Resources.edit</a>
+
+    }
+    else if (Model.Content is InformationContent info)
+    {
+        <div class="row mb-1">
+            <span class="col-sm-2 form-label fw-bold">@Resources.title</span>
+            <span class="col-sm-10" id="theme">@info.Title</span>
+        </div>
+        <div class="row mb-1">
+            <span class="col-sm-2 form-label fw-bold">@Resources.info</span>
+            <span class="col-sm-10" id="theme">@info.TextInformation</span>
+        </div>
+<a class="btn btn-primary" type="button" asp-controller="Step" asp-action="UpdatePage" asp-route-stepId="@Model.Id">@Resources.edit</a>
+
+    }

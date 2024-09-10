@@ -1,0 +1,60 @@
+﻿@using NT.BL.Domain.projectpck
+@using NT.UI.MVC.Resources
+@model NT.BL.Domain.platformpck.Platform
+
+@{
+    ViewBag.Title = "PlatformDetails";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/themePage.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HeadPlatformHomePage</title>
+</head>
+<body>
+<div class="table-container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>@Resources.first_name</th>
+            <th>@Resources.last_name</th>
+            <th>@Resources.birthday</th>
+            <th>@Resources.email_adress</th>
+            <th>@Resources.owned_projects</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var identityUser in Model.OrganizationMaintainer)
+        {
+            var identityUserOrg = identityUser;
+            <tr>
+                <td>@identityUserOrg.FirstName</td>
+                <td>@identityUserOrg.LastName</td>
+                <td>@identityUserOrg.BirthDate.Day/@identityUserOrg.BirthDate.Month/@identityUserOrg.BirthDate.Year</td>
+                <td>@identityUserOrg.Email</td>
+                <td>
+                    <ul>
+                        @foreach (Project project in identityUserOrg.OwnedProjects)
+                        {
+                            <li>@project.Name</li>
+                        }
+                    </ul>
+                </td>
+                
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

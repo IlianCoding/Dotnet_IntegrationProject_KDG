@@ -1,0 +1,38 @@
+﻿@using NT.BL.Domain.users
+@using NT.UI.MVC.Resources
+@model NT.UI.MVC.Models.UserViewModels.LinkingSessionViewModel
+
+@{
+    ViewBag.Title = "Link Finished Session to Existing User";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/linkUserToSession.entry.js" defer></script>
+}
+
+<div class="container-fluid h-100">
+    <div class="row justify-content-center align-items-center h-100">
+        <div id="login_card" class="col-md-4">
+            <section>
+                <div id="form_card" class="form-floating mb-3">
+                    <input id="userEmail" class="form-control" type="text" placeholder="Email"/>
+                    <label for="userEmail" class="form-label">@Resources.email_adress</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select id="colorSelect" name="Color" class="form-select">
+                        <option value="">Select your color</option>
+                        @foreach (Color color in Enum.GetValues(typeof(Color)))
+                        {
+                            <option value="@((int)color)">@color</option>
+                        }
+                    </select>
+                    <label for="colorSelect" class="form-label">Color</label>
+                </div>
+                <button id="submitBtn" class="btn btn-primary">@Resources.submit</button>
+            </section>
+        </div>
+    </div>
+</div>

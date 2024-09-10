@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "bootstrap-switch": "^3.4.0",
+    "bootstrap5-toggle": "^5.0.4",
+    "chart.js": "^4.4.3",
+    "ts-loader": "^9.5.1"
+  },
+  "devDependencies": {
+    "@types/chart.js": "^2.9.41"
+  }
+}

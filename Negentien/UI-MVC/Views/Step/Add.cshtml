@@ -1,0 +1,272 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using NT.BL.Domain.flowpck
+@model NT.BL.Domain.flowpck.Flow
+
+@{
+    ViewBag.Title = "Create step";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+}
+
+
+<h2>Create a new step</h2>
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-multi-tab" data-bs-toggle="pill" data-bs-target="#pills-multi" type="button" role="tab" aria-controls="pills-multi" aria-selected="true">Multiple choice</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-single-tab" data-bs-toggle="pill" data-bs-target="#pills-single" type="button" role="tab" aria-controls="pills-single" aria-selected="false">Single choice</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-range-tab" data-bs-toggle="pill" data-bs-target="#pills-range" type="button" role="tab" aria-controls="pills-range" aria-selected="false">Range question</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-open-tab" data-bs-toggle="pill" data-bs-target="#pills-open" type="button" role="tab" aria-controls="pills-open" aria-selected="false">Open question</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#pills-info" type="button" role="tab" aria-controls="pills-info" aria-selected="false">Information</button>
+    </li>
+</ul>
+
+
+<div class="tab-content" id="pills-tabContent">
+<!--multiple question tab -->
+<div class="tab-pane fade show active" id="pills-multi" role="tabpanel" aria-labelledby="pills-multi-tab" tabindex="0">
+    <h1>Multiple choice question</h1>
+    <div>
+        <h2>Question:</h2>
+        <div class="row">
+            <label for="vraagInput_m" class="col-sm-2 form-label">What question would you like to ask:</label>
+            <div class="col-sm-10">
+                <input id="vraagInput_m" class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h2>Answers:</h2>
+        <label for="antwoordInput_m1" class="col-sm-2 form-label">What are the answeroptions:</label>
+        <div class="col-sm-10">
+            <input id="antwoordInput_m1" class="form-control" type="text">
+            <input id="antwoordInput_m2" class="form-control" type="text">
+            <input id="antwoordInput_m3" class="form-control" type="text">
+            <input id="antwoordInput_m4" class="form-control" type="text">
+            <input id="antwoordInput_m5" class="form-control" type="text">
+        </div>
+    </div>
+    <div>
+        <h2>Give it a theme:</h2>
+
+        <select id="themes_m">
+            @foreach (Theme theme in ViewBag.Project.Theme.Subthemes!)
+            {
+                <option value="option1" class="text-light">@theme.ThemeName</option>
+            }
+        </select>
+
+    </div>
+    <div>
+        <h2>Add conditional point:</h2>
+        <label for="answerOption_m1" class="col-sm-2 form-label">Answeroption 1</label>
+        <label for="answerOption_m2" class="col-sm-2 form-label">Answeroption 2</label>
+        <label for="answerOption_m3" class="col-sm-2 form-label">Answeroption 3</label>
+        <label for="answerOption_m4" class="col-sm-2 form-label">Answeroption 4</label>
+        <label for="answerOption_m5" class="col-sm-2 form-label">Answeroption 5</label>
+
+        <div>
+            <input id="answerOption_m1" type="radio" name="m_optie">
+            <input id="answerOption_m2" type="radio" name="m_optie">
+            <input id="answerOption_m3" type="radio" name="m_optie">
+            <input id="answerOption_m4" type="radio" name="m_optie">
+            <input id="answerOption_m5" type="radio" name="m_optie">
+        </div>
+
+    </div>
+    <button type="button" class="btn btn-primary" id="multiButton"></button>
+</div>
+<!--single question tab -->
+<div class="tab-pane fade" id="pills-single" role="tabpanel" aria-labelledby="pills-single-tab" tabindex="0">
+    <h1>Single choice question</h1>
+    <div>
+        <h2>Is this a conditional step:</h2>
+        <label for="true_s" class="col-sm-2 form-label">True</label>
+        <label for="false_s" class="col-sm-2 form-label">False</label>
+        <div>
+            <input id="true_s" type="radio">
+            <input id="false_s" type="radio">
+        </div>
+    </div>
+    <div class="row">
+        <h2>Question:</h2>
+        <label for="vraagInput_s" class="col-sm-2 form-label">What question would you like to ask:</label>
+        <div class="col-sm-10">
+            <input id="vraagInput_s" class="form-control" type="text">
+        </div>
+    </div>
+    <div class="row">
+        <h2>Answers:</h2>
+        <label for="antwoordInput_s1" class="col-sm-2 form-label">What are the answeroptions:</label>
+        <div class="col-sm-10">
+            <input id="antwoordInput_s1" class="form-control" type="text">
+            <input id="antwoordInput_s2" class="form-control" type="text">
+            <input id="antwoordInput_s3" class="form-control" type="text">
+            <input id="antwoordInput_s4" class="form-control" type="text">
+            <input id="antwoordInput_s5" class="form-control" type="text">
+        </div>
+    </div>
+    <div>
+        <h2>Give it a theme:</h2>
+        <select id="themes_s">
+            @foreach (Theme theme in ViewBag.Project.Theme.Subthemes!)
+            {
+                <option value="option1" class="text-light">@theme.ThemeName</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <h2>Add a conditional point:</h2>
+        <label for="answeroption_s1" class="col-sm-2 form-label">Answeroption 1</label>
+        <label for="answeroption_s2" class="col-sm-2 form-label">Answeroption 2</label>
+        <label for="answeroption_s3" class="col-sm-2 form-label">Answeroption 3</label>
+        <label for="answeroption_s4" class="col-sm-2 form-label">Answeroption 4</label>
+        <label for="answeroption_s5" class="col-sm-2 form-label">Answeroption 5</label>
+
+        <div>
+            <input id="answeroption_s1" type="radio">
+            <input id="answeroption_s2" type="radio">
+            <input id="answeroption_s3" type="radio">
+            <input id="answeroption_s4" type="radio">
+            <input id="answeroption_s5" type="radio">
+        </div>
+        <div>
+            <h3>Make a conditional point</h3>
+            <label for="cp_naam_s" class="col-sm-2 form-label">What is the name:</label>
+            <div class="col-sm-10">
+                <input id="cp_naam_s" class="form-control" type="text">
+            </div>
+            <label for="cp_step_s" class="col-sm-2 form-label">What step does it lead to:</label>
+            <div class="col-sm-10">
+                <select id="cp_step_s">
+                    <option value="option1" class="text-light">Select the step</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" id="singleButton"></button>
+</div>
+<!--range question tab -->
+<div class="tab-pane fade" id="pills-range" role="tabpanel" aria-labelledby="pills-range-tab" tabindex="0">
+    <h1>Range question</h1>
+    <div>
+        <h2>Is this a conditional step:</h2>
+        <label for="true_r" class="col-sm-2 form-label">True</label>
+        <label for="false_r" class="col-sm-2 form-label">False</label>
+        <div>
+            <input id="true_r" type="radio">
+            <input id="false_r" type="radio">
+        </div>
+    </div>
+    <div class="row">
+        <h2>Vraag:</h2>
+        <label for="vraagInput_r" class="col-sm-2 form-label">What question would you like to ask:</label>
+        <div class="col-sm-10">
+            <input id="vraagInput_r" class="form-control" type="text">
+        </div>
+    </div>
+    <div class="row">
+        <h2>Antwoordopties:</h2>
+        <label for="antwoordInput_r1" class="col-sm-2 form-label">What are the answeroptions:</label>
+        <div class="col-sm-10">
+            <input id="antwoordInput_r1" class="form-control" type="text">
+            <input id="antwoordInput_r2" class="form-control" type="text">
+            <input id="antwoordInput_r3" class="form-control" type="text">
+            <input id="antwoordInput_r4" class="form-control" type="text">
+            <input id="antwoordInput_r5" class="form-control" type="text">
+        </div>
+        <div>
+            <h2>Give it a theme:</h2>
+            <select id="themes_r">
+                @foreach (Theme theme in ViewBag.Project.Theme.Subthemes!)
+                {
+                    <option value="option1" class="text-light">@theme.ThemeName</option>
+                }
+            </select>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" id="rangeButton"></button>
+</div>
+<!--open question tab -->
+<div class="tab-pane fade" id="pills-open" role="tabpanel" aria-labelledby="pills-open-tab" tabindex="0">
+    <h1>Open question</h1>
+    <div>
+        <h2>Is this a conditional step:</h2>
+        <label for="true_o" class="col-sm-2 form-label">True</label>
+        <label for="false_o" class="col-sm-2 form-label">False</label>
+        <div>
+            <input id="true_o" type="radio">
+            <input id="false_o" type="radio">
+        </div>
+    </div>
+    <div class="row">
+        <h2>Question:</h2>
+        <label for="vraagInput_o" class="col-sm-2 form-label">What question would you like to ask:</label>
+        <div class="col-sm-10">
+            <input id="vraagInput_o" class="form-control" type="text">
+        </div>
+    </div>
+    <div>
+        <h2>Give it a theme:</h2>
+        <select id="themes_o">
+            @foreach (Theme theme in ViewBag.Project.Theme.Subthemes!)
+            {
+                <option value="option1" class="text-light">@theme.ThemeName</option>
+            }
+        </select>
+    </div>
+    <button type="button" class="btn btn-primary" id="openButton"></button>
+</div>
+<!--info tab -->
+
+<div class="tab-pane fade" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0">
+    <h1>Information</h1>
+    <div>
+        <h2>Is this a conditional step:</h2>
+        <label for="true" class="col-sm-2 form-label">True</label>
+        <label for="false" class="col-sm-2 form-label">False</label>
+        <div>
+            <input id="true" type="radio">
+            <input id="false" type="radio">
+        </div>
+    </div>
+    <div class="row">
+        <h2>Title:</h2>
+        <label for="vraagInput" class="col-sm-2 form-label">What is the title:</label>
+        <div class="col-sm-10">
+            <input id="vraagInput" class="form-control" type="text">
+        </div>
+    </div>
+    <div class="row">
+        <h2>Information:</h2>
+        <label for="textInput" class="col-sm-2 form-label">What info would you like to share:</label>
+        <div class="col-sm-10">
+            <input id="textInput" class="form-control" type="text">
+        </div>
+    </div>
+    <div>
+        <h2>Give it a theme:</h2>
+        <select id="themes_i">
+            @foreach (Theme theme in ViewBag.Project.Theme.Subthemes!)
+            {
+                <option value="option1" class="text-light">@theme.ThemeName</option>
+            }
+        </select>
+    </div>
+    <button type="button" class="btn btn-primary" id="infoButton"></button>
+</div>
+
+</div>

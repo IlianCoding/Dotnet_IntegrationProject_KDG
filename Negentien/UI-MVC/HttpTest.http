@@ -1,0 +1,109 @@
+﻿###
+POST http://localhost:5000/api/RunningFlows
+Accept: application/json,
+Content-Type: application/json
+
+{
+  "RunningFlowTime": "2024-05-10T14:30:00Z",
+  "State": 0,
+  "CurrentFlowId": 1,
+  "CreatedAttendantName": "attendantName"
+}
+
+###
+PUT http://localhost:5000/api/Sessions/1/endtime
+Content-Type: application/json
+
+{
+  "EndTime": "2024-05-10T14:30:00Z"
+}
+
+###
+PUT http://localhost:5000/api/RunningFlows/1/update
+Content-Type: application/json
+
+{
+  "IsActive": 1
+}
+
+###
+GET http://localhost:5000/api/RunningFlows/AttendantNamesAndCurrentFlow
+
+###
+GET http://localhost:5000/api/RunningFlows/RunningFlows
+
+###
+GET http://localhost:5000/api/Flows/FlowWithOpenRunningFlow
+
+
+###
+#@no-redirect
+PUT https://localhost:7153/api/AnswerOptions/10
+Content-Type: application/json
+
+{
+  "ConditionalPointId": 2,
+  "TextAnswer": "qsdqsdqsdsd"
+}
+
+###
+POST https://localhost:5000/api/Detection
+Content-Type: multipart/form-data
+
+###
+POST https://localhost:7153/api/Detection/ReceivingOpenAnswer
+Accept: application/json,
+Content-Type: application/json
+
+{
+  "AnswerInput": "dsfffffffffff",
+  "RunningFlowId": "7",
+  "Color": 1,
+  "QuestionId": "21"
+}
+###
+POST https://localhost:7153/api/Detection/StartingSession
+Accept: application/json,
+Content-Type: application/json
+
+{
+  "AnswerInput": "dsfffffffffff",
+  "RunningFlowId": "7",
+  "Color": 1,
+  "QuestionId": "21"
+}
+###
+DELETE http://localhost:5000/api/Projects/Delete/1
+
+
+###
+DELETE https://localhost:7153/api/Projects/Delete/1
+###
+DELETE http://localhost:5000/api/Projects/Delete/1
+
+
+###
+DELETE http://localhost:5000/api/Flows/1
+
+###
+DELETE http://localhost:5000/api/Flows/1
+###
+POST https://localhost:7153/api/Detection/ReceivingOpenAnswer
+Accept: application/json,
+Content-Type: application/json
+
+{
+  "AnswerInput": "dsfffffffffff",
+  "RunningFlowId": "7",
+  "Color": 3,
+  "QuestionId": "21"
+}
+###
+PUT http://localhost:5000/api/Themes/1/update
+Accept: application/json,
+Content-Type: application/json
+
+{
+  "NewThemeName": "editHeadthemeName.value",
+  "IsHeadTheme": "editThemeInformation.value",
+}

@@ -1,0 +1,17 @@
+﻿.bg-image {
+  position: relative;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.1);
+
+    /* Adjust the scale factor as needed */
+  }
+}

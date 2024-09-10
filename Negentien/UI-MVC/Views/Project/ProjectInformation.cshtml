@@ -1,0 +1,19 @@
+@{
+    ViewBag.Title = "Project Information";
+    Layout = "_Layout";
+}
+
+@using NT.UI.MVC.Resources
+@model NT.BL.Domain.projectpck.Project
+
+@section Scripts {
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/site.entry.js" defer></script>
+}
+
+<div>
+    <h2>@Resources.info_project</h2>
+    <p>@Model.Name</p>
+    <p>@Model.ProjectInformation</p>
+</div>
+

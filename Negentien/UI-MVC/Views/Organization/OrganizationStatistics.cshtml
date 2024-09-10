@@ -1,0 +1,173 @@
+﻿@model NT.BL.Domain.Util.SharingPlatformNumbers
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+
+    int startYear = 1983;
+    int endYear = DateTime.Today.Year;
+}
+
+@section Scripts
+{
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/sharingPlatformStatistics.entry.js" defer></script>
+    <link rel="stylesheet" href="~/dist/sharingPlatformStatistics.css">
+
+}
+
+<div class="statistics-background justify-content-center mt-4 p-5 rounded-5">
+    <h2 class="statistics-font-title">Sub-Platform Dashboard</h2>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="card border-0 col-3 m-2 shadow-sm">
+                <div class="card-body border-white  ">
+                    <h5 class="statistics-font-rest">Total Projects</h5>
+                    <p class="statistics-font-rest number-looks">@Model.TotalProjects</p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm  col-3 m-2">
+                <div class="card-body border-white">
+                    <h5 class="statistics-font-rest">Total Flows</h5>
+                    <p class=" number-looks ">@Model.TotalFlows</p>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm  col-3 m-2">
+                <div class="card-body border-white">
+                    <h5 class="statistics-font-rest">Avg Participants per Flow</h5>
+                    <p class=" number-looks ">@Model.AvgParticipantsPerFlow.ToString("0.##")</p>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm  col-3 m-2">
+                <div class="card-body border-white">
+                    <h5 class="statistics-font-rest">Avg Amount of Steps per Flow</h5>
+                    <p class=" number-looks ">@Model.AvgAmountOfStepsPerFlow.ToString("0.##")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-center">
+        <div class="card m-2 shadow-sm">
+            <div class="card-body border-white my-2">
+                <h5 class="statistics-font-rest mb-2">Amount of Participants per Flow:</h5>
+                <div class="col-10 mt-3">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="card m-2 shadow-sm">
+            <div class="card-body border-white my-2">
+                <h5 id="running-flows-title" class="statistics-font-rest mb-2"></h5>
+                <select class="form-select" id="year-runningFlows">
+                    @{
+
+                        for (int i = endYear; i >= startYear; i--)
+                        {
+                            if (i == endYear)
+                            {
+                                <option value="@i" selected="selected">@i</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        
+                        }
+                    }
+                    
+                </select>
+                <div class="col-10 mt-3">
+                    <canvas id="runningFlow-data"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="card m-2 shadow-sm">
+            <div class="card-body border-white my-2">
+                <div>
+                    <h5 class="statistics-font-rest mb-2">Amount of Steps per Theme in a Project</h5>
+                    <div class=" justify-content-center">
+                        <div class="row mb-3 mt-4">
+                            <label for="project-id" class="col-sm-2 col-form-label subheading">Project:</label>
+                            <div class="col-sm-10">
+                                <select class="form-select" id="project-id">
+                                    @foreach (var project in Model.ProjectData)
+                                    {
+                                        <option value="@project.Id">@project.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-7 mt-3">
+                            <canvas id="step-data"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card m-2 shadow-sm">
+            <div class="card-body border-white  ">
+
+              
+                <div class="mb-1">
+                    <label for="project-id" class="col-sm-2 col-form-label subheading ">Flow:</label>
+
+                    <div class="col-sm-10">
+                        <select class="form-select" id="flow-id">
+                            @foreach (var flow in Model.FlowData)
+                            {
+                                <option value="@flow.Id">@flow.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h5 class="statistics-font-rest mt-3">All Answers of Questions in a Flow</h5>
+                    <button type="button" id="download-all-answers" class="btn btn-primary mt-2 mb-3">Download all Answers</button>
+                </div>
+                <h5 class="statistics-font-rest mb-3">Most Popular Answer of Questions in a Flow</h5>
+                <table id="popular-answer-table" class="table ">
+                    <thead>
+                    <tr>
+                        <th>Multiple/ Single Choice Question</th>
+                        <th>Most Popular Answer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="modal" tabindex="-1" id="exampleModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">No content Found</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>There is not enough data yet.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Okay</button>
+            </div>
+        </div>
+    </div>
+</div>

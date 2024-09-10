@@ -1,0 +1,28 @@
+﻿@using NT.UI.MVC.Resources
+@model NT.BL.Domain.flowpck.RunningFlow
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+@section Scripts {
+    <script src="~/dist/ThankYouPage.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/site.entry.js" defer></script>
+    <link href="~/dist/thankYouMobilePage.css" rel="stylesheet">
+}
+
+<div class="container">
+    <h1>@Resources.thank_you_participate</h1>
+    <div>
+        <p>@Resources.stay_updated_q</p>
+        <p>@Resources.fill_info_q</p>
+    </div>
+    <input id="flowIdThankPage" type="hidden" value="@ViewBag.Flow.Id"/>
+    <div class="cta-buttons justify-content-center mt-5">
+        <button class="btn btn-primary" id="updateButton">@Resources.stay_updated_a</button>
+        <button class="btn btn-primary" id="alreadyButton">@Resources.fill_info_a</button>
+        <a id="speciale_knop" class="btn btn-primary text-white" asp-controller="Step" asp-action="FinishMobilePage" asp-route-runningFlowId="@Model.Id">@Resources.no_update</a>
+    </div>
+</div>

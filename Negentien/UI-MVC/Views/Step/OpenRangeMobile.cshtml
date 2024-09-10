@@ -1,0 +1,43 @@
+﻿@using NT.BL.Domain.questionpck.QuestionDomPck
+@using NT.BL.Domain.users
+@using NT.UI.MVC.Resources
+@model NT.UI.MVC.Models.SurveyViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+    QuestionOpen questionOpen = (QuestionOpen)Model.Step.Content;
+}
+
+@section Scripts
+{
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/OpenRangeMobile.entry.js" defer></script>
+}
+
+<input id="QuestionId" value="@questionOpen.Id" type="hidden">
+<input id="runningFlowIdOpenRangeMobile" value="@Model.RunningFlowId" type="hidden">
+<input id="stepIdOpenRangeMobile" value="@Model.Step.Id" type="hidden">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                <label class="form-label">@questionOpen.QuestionText</label>
+            </h2>
+            <div class="form-floating mb-3">
+                <select id="colorSelect" class="form-select">
+                    <option value="">@Resources.select_colour</option>
+                    @foreach (Color color in Enum.GetValues(typeof(Color)))
+
+                    {
+                        <option value="@((int)color)">@color</option>
+                    }
+                </select>
+                <label for="colorSelect" class="form-label">@Resources.color</label>
+            </div>
+            <input form="openvraag" type="text" class="form-control mb-3" id="openQuestionAnswer" placeholder="Your answer">
+            <button id="submitOpenAnswer" class="btn btn-primary">@Resources.submit</button>
+        </div>
+    </div>
+</div>

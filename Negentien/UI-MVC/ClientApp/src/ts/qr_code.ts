@@ -1,0 +1,1 @@
+﻿import "../scss/qr_code.scss"

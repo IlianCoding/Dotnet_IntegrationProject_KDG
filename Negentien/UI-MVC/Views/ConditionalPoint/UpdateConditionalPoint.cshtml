@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using NT.BL.Domain.flowpck
+@using NT.BL.Domain.questionpck.AnswerDomPck
+@using NT.BL.Domain.questionpck.QuestionDomPck
+@using NT.UI.MVC.Resources
+@model NT.BL.Domain.flowpck.Step
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+@section Scripts
+{
+<script src="~/dist/updateConditionalPoint.entry.js" defer></script>
+<script src="~/dist/home.entry.js" defer></script>
+<script src="~/dist/site.entry.js" defer></script>
+}
+@if (Model.Content is QuestionWithOption questionWithOption)
+{
+    <div hidden="hidden" id="conditional">@ViewBag.CP.Id</div>
+    <div>
+        <h3>@Resources.make_conditional_point</h3>
+        <label for="nameInput" class="col-sm-2 form-label">@Resources.title</label>
+        <div class="col-sm-10">
+            <input id="nameInput" class="form-control" type="text">
+        </div>
+        @*<label for="answeroption">@Resources.what_answeroption_cp</label>
+        <div>
+            <select id="answeroption">
+                @foreach (AnswerOption answer in questionWithOption.AnswerOptions)
+                {
+                    if(answer.ConditionalPoint==null)
+                    {
+                        <option class="text-light"  >@answer.TextAnswer</option>
+                    }
+                }
+            </select>
+        </div>*@
+        <label for="cp_step" class="col-sm-2 form-label">@Resources.what_step</label>
+        <div class="col-sm-10">
+            <select id="cp_step">
+                @foreach (Step step in ViewBag.Flow.Steps)
+                {
+                    @if (step.IsConditioneel && step.NextStep == null)
+                    {
+                        <option value=@step.Id class="text-light">@step.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <button class="btn btn-primary" type="button" id="cpButton">@Resources.lets_go</button>
+    </div>
+}
+else
+{
+    <div>
+        <h2>@Resources.something_went_wrong</h2>
+    </div>
+}

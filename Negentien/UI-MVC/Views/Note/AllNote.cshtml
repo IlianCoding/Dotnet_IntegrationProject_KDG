@@ -1,0 +1,33 @@
+﻿@using NT.BL.Domain.sessionpck
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<h1>All Notes</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Index</th>
+        <th>Title</th>
+        <th>Created by</th>
+        <th>Detail</th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        int teller = 0;
+    }
+    @foreach (Note note in @Model)
+    {
+        <tr>
+            <td>@teller</td>
+            <td>@note.NoteTitle</td>
+            <td>@note.CreatedAttendantName</td>
+            <td>
+                <a asp-controller="Note" asp-action="NoteDetail" asp-route-noteId="@note.Id">Details</a>
+            </td>
+        </tr>
+        teller++;
+    }
+    </tbody>
+</table>

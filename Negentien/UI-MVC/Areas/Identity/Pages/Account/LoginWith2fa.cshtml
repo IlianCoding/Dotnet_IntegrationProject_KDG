@@ -1,0 +1,45 @@
+﻿@page
+@model LoginWith2FaModel
+@{
+    ViewData["Title"] = "Two-factor authentication";
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4 d-flex flex-column justify-content-center">
+        <form method="post" asp-route-returnUrl="@Model.ReturnUrl">
+            <input asp-for="RememberMe" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.TwoFactorCode" class="form-control" autocomplete="off" />
+                <label asp-for="Input.TwoFactorCode" class="form-label"></label>
+                <span asp-validation-for="Input.TwoFactorCode" class="text-danger"></span>
+            </div>
+            <div class="checkbox mb-3">
+                <label asp-for="Input.RememberMachine" class="form-label">
+                    <input asp-for="Input.RememberMachine" />
+                    @Html.DisplayNameFor(m => m.Input.RememberMachine)
+                </label>
+            </div>
+            <div>
+                <button type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6 offset-md-1">
+        <br/>
+        <h3>Step 1: Enter your Password</h3>
+        <br/>
+        <p>Please enter your account password to proceed.</p>
+        <br/>
+        <h3>Step 2: Verify Your Identity</h3>
+        <br/>
+        <p>Email Code: We'll send a verification code to your registered email address.</p>
+        <p>After entering the verification code, you will be securely logged into your account.</p>
+    </div>
+</div>

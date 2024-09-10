@@ -1,0 +1,229 @@
+﻿@using Humanizer.Localisation
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using NT.BL.Domain.projectpck
+@using Resources = NT.UI.MVC.Resources.Resources
+
+@model NT.BL.Domain.flowpck.Flow
+
+@{
+    ViewBag.Title = "Create condtional step";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/addConditionalStep.entry.js" defer></script>
+
+}
+
+<span class="flow-id" value="@Model.Id">@Model.Id</span>
+
+<h2>@Resources.create_step</h2>
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-multi-tab" data-bs-toggle="pill" data-bs-target="#pills-multi" type="button" role="tab" aria-controls="pills-multi" aria-selected="true">@Resources.multiple_choice</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-single-tab" data-bs-toggle="pill" data-bs-target="#pills-single" type="button" role="tab" aria-controls="pills-single" aria-selected="false">@Resources.single_choice</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-range-tab" data-bs-toggle="pill" data-bs-target="#pills-range" type="button" role="tab" aria-controls="pills-range" aria-selected="false">@Resources.range_choice</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-open-tab" data-bs-toggle="pill" data-bs-target="#pills-open" type="button" role="tab" aria-controls="pills-open" aria-selected="false">@Resources.open_question</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#pills-info" type="button" role="tab" aria-controls="pills-info" aria-selected="false">@Resources.info</button>
+    </li>
+</ul>
+
+
+<div class="tab-content" id="pills-tabContent">
+    <!--multiple question tab -->
+    <div class="tab-pane fade show active" id="pills-multi" role="tabpanel" aria-labelledby="pills-multi-tab" tabindex="0">
+        <h1>@Resources.multiple_choice</h1>
+        <div class="row">
+            <label for="nameInput_m" class="col-sm-2 form-label">@Resources.give_name_step</label>
+            <div class="col-sm-10">
+                <input id="nameInput_m" class="form-control" type="text">
+                <span class="text-danger" id="nameInputSpan_m"></span>
+            </div>
+        </div>
+        <div class="row">
+            <h2>@Resources.question</h2>
+            <label for="vraagInput_m" class="col-sm-2 form-label">@Resources.what_question</label>
+            <div class="col-sm-10">
+                <input id="vraagInput_m" class="form-control" type="text">
+                <span class="text-danger" id="vraagInputSpan_m"></span>
+            </div>
+        </div>
+        <div class="row">
+            <h2>@Resources.answers</h2>
+            <label for="antwoordInput1_m" class="col-sm-2 form-label">@Resources.what_answeroption</label>
+            <div class="col-sm-10" id="antwoordInput_m">
+                <input id="antwoordInput1_m" class="form-control" type="text">
+                <input id="antwoordInput2_m" class="form-control" type="text">
+                <input id="antwoordInput3_m" class="form-control" type="text">
+                <input id="antwoordInput4_m" class="form-control" type="text">
+                <input id="antwoordInput5_m" class="form-control" type="text">
+            </div>
+        </div>
+        <div>
+            <h2>@Resources.give_theme</h2>
+            <select id="themes_m">
+                @foreach (var theme in ViewBag.Project.Theme.Subthemes)
+                {
+                    <option value="@theme.Id" class="text-light">@theme.ThemeName</option>
+                }
+            </select>
+        </div>
+    </div>
+    <!--single question tab -->
+    <div class="tab-pane fade" id="pills-single" role="tabpanel" aria-labelledby="pills-single-tab" tabindex="0">
+        <h1>@Resources.single_choice</h1>
+        <div class="row">
+            <label for="nameInput_s" class="col-sm-2 form-label">@Resources.give_name_step</label>
+            <div class="col-sm-10">
+                <input id="nameInput_s" class="form-control" type="text">
+                <span class="text-danger" id="nameInputSpan_s"></span>
+            </div>
+        </div>
+        <div class="row">
+            <h2>@Resources.question</h2>
+            <label for="vraagInput" class="col-sm-2 form-label">@Resources.what_question</label>
+            <div class="col-sm-10">
+                <input id="vraagInput_s" class="form-control" type="text">
+                <span class="text-danger" id="vraagInputSpan_s"></span>
+            </div>
+        </div>
+        <div class="row">
+            <h2>@Resources.answers</h2>
+            <label for="antwoordInput1_s" class="col-sm-2 form-label">@Resources.what_answeroption</label>
+            <div class="col-sm-10" id="antwoordInput_s">
+                <input id="antwoordInput1_s" class="form-control" type="text">
+                <input id="antwoordInput2_s" class="form-control" type="text">
+                <input id="antwoordInput3_s" class="form-control" type="text">
+                <input id="antwoordInput4_s" class="form-control" type="text">
+                <input id="antwoordInput5_s" class="form-control" type="text">
+            </div>
+        </div>
+        <div>
+            <h2>@Resources.give_theme</h2>
+            <select id="themes_s">
+                @foreach (var theme in ViewBag.Project.Theme.Subthemes)
+                {
+                    <option value="@theme.Id" class="text-light">@theme.ThemeName</option>
+                }
+            </select>
+        </div>
+    </div>
+    <!--range question tab -->
+    <div class="tab-pane fade" id="pills-range" role="tabpanel" aria-labelledby="pills-range-tab" tabindex="0">
+        <h1>@Resources.range_choice</h1>
+        <div class="row">
+            <label for="nameInput_r" class="col-sm-2 form-label">@Resources.give_name_step</label>
+            <div class="col-sm-10">
+                <input id="nameInput_r" class="form-control" type="text">
+                <span class="text-danger" id="nameInputSpan_r"></span>
+            </div>
+        </div>
+        <div class="row">
+            <h2>@Resources.question</h2>
+            <label for="vraagInput_r" class="col-sm-2 form-label">@Resources.what_question</label>
+            <div class="col-sm-10">
+                <input id="vraagInput_r" class="form-control" type="text">
+                <span class="text-danger" id="vraagInputSpan_r"></span>
+            </div>
+        </div>
+        <div class="row">
+            <h2>@Resources.answers</h2>
+            <label for="antwoordInput1_r" class="col-sm-2 form-label">@Resources.what_answeroption</label>
+            <div class="col-sm-10" id="antwoordInput_r">
+                <input id="antwoordInput1_r" class="form-control" type="text">
+                <input id="antwoordInput2_r" class="form-control" type="text">
+                <input id="antwoordInput3_r" class="form-control" type="text">
+                <input id="antwoordInput4_r" class="form-control" type="text">
+                <input id="antwoordInput5_r" class="form-control" type="text">
+            </div>
+            <div>
+                <h2>@Resources.give_theme</h2>
+                <select id="themes_r">
+                    @foreach (var theme in ViewBag.Project.Theme.Subthemes)
+                    {
+                        <option value="@theme.Id" class="text-light">@theme.ThemeName</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <!--open question tab -->
+    <div class="tab-pane fade" id="pills-open" role="tabpanel" aria-labelledby="pills-open-tab" tabindex="0">
+        <h1>@Resources.open_question</h1>
+        <div class="row">
+            <label for="nameInput_o" class="col-sm-2 form-label">@Resources.give_name_step</label>
+            <div class="col-sm-10">
+                <input id="nameInput_o" class="form-control" type="text">
+                <span class="text-danger" id="nameInputSpan_o"></span>
+            </div>
+        </div>
+        <div class="row">
+            <h2>@Resources.question</h2>
+            <label for="vraagInput_o" class="col-sm-2 form-label">@Resources.what_question</label>
+            <div class="col-sm-10">
+                <input id="vraagInput_o" class="form-control" type="text">
+                <span class="text-danger" id="vraagInputSpan_o"></span>
+            </div>
+        </div>
+        <div>
+            <h2>@Resources.give_theme</h2>
+            <select id="themes_o">
+                @foreach (var theme in ViewBag.Project.Theme.Subthemes)
+                {
+                    <option value="@theme.Id" class="text-light">@theme.ThemeName</option>
+                }
+            </select>
+        </div>
+    </div>
+    <!--info tab -->
+
+    <div class="tab-pane fade" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab" tabindex="0">
+        <h1>@Resources.info</h1>
+        <div class="row">
+            <label for="nameInput_i" class="col-sm-2 form-label">@Resources.give_name_step</label>
+            <div class="col-sm-10">
+                <input id="nameInput_i" class="form-control" type="text">
+                <span class="text-danger" id="nameInputSpan_i"></span>
+            </div>
+        </div>
+        <div class="row">
+            <h2>@Resources.title</h2>
+            <label for="titleInput" class="col-sm-2 form-label">@Resources.what_title</label>
+            <div class="col-sm-10">
+                <input id="titleInput" class="form-control" type="text">
+                <span class="text-danger" id="titleInputSpan_i"></span>
+            </div>
+        </div>
+        <div class="row">
+            <h2>@Resources.info</h2>
+            <label for="infoInput" class="col-sm-2 form-label">@Resources.what_info</label>
+            <div class="col-sm-10">
+                <input id="infoInput" class="form-control" type="text">
+                <span class="text-danger" id="infoInputSpan_i"></span>
+            </div>
+        </div>
+        <div>
+            <h2>@Resources.give_theme</h2>
+            <select id="themes_i">
+                @foreach (var theme in ViewBag.Project.Theme.Subthemes)
+                {
+                    <option value="@theme.Id" class="text-light">@theme.ThemeName</option>
+                }
+            </select>
+        </div>
+    </div>
+    <button id="addStep" type="button" class="btn btn-primary">@Resources.add</button>
+
+</div>

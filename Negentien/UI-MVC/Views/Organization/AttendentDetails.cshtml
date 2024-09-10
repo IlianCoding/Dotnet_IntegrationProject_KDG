@@ -1,0 +1,83 @@
+﻿@using NT.BL.Domain.users
+@using NT.UI.MVC.Resources
+@model NT.UI.MVC.Models.UserViewModels.AttendentDetailsViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/site.entry.js" defer></script>
+    <script src="~/dist/home.entry.js" defer></script>
+    <script src="~/dist/updateAttendentProject.entry.js" defer></script>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@Resources.attendant_details</title>
+</head>
+<body>
+<div class="container-fluid table-container text-center">
+    <div class="d-flex justify-content-center mt-5">
+        <h1>@Resources.all_employees</h1>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>@Resources.first_name</th>
+            <th>@Resources.last_name</th>
+            <th>@Resources.birthday</th>
+            <th>@Resources.email_adress</th>
+            <th>@Resources.assigned_project</th>
+        </tr>
+        </thead>
+        <tbody>
+        @{ var index = 0; }
+
+        @foreach (AttendentUser attendentUser in Model.AttendentUsers)
+        {
+            <tr>
+                <td>@attendentUser.FirstName</td>
+                <td>@attendentUser.LastName</td>
+                <td>@attendentUser.BirthDate.Day/@attendentUser.BirthDate.Month/@attendentUser.BirthDate.Year</td>
+                <td>@attendentUser.Email</td>
+                @if (attendentUser.AssignedProject != null)
+                {
+                    <td>@attendentUser.AssignedProject.Name</td>
+                }
+                else
+                {
+                    <td>No project assigned!</td>
+                }
+                <td>
+                    <form id="reassignProjectForm-attendant-@index">
+                        <input id="attendantEmail" type="hidden" name="email" value="@attendentUser.Email">
+                        <select id="projectSelect" name="projectId" class="form-select form-select-sm" aria-label="Select Project" required>
+                            @foreach (var project in Model.Projects)
+                            {
+                                <option value="@project.Id.ToString()">@project.Name</option>
+                            }
+                        </select>
+                        <button type="button" class="btn btn-primary btn-sm reassignButton">@Resources.reassign</button>
+                    </form>
+                </td>
+            </tr>
+            index++;
+        }
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="6">
+                <a asp-controller="Organization" asp-action="AddAttendentUser" class="add-link">@Resources.add_attendant</a>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+</body>
+</html>
